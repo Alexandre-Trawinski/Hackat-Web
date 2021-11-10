@@ -18,21 +18,23 @@
 	</style>
 
 	<div class="container">
-		<center>
 			<ul>
 				{% for lesHackathons in listeHackathons %}
-					<li>{{lesHackathons.dateDebut|date('Y:m:d')}}</li>
-					<li>{{lesHackathons.heureDebut|date('H:i:s')}}</li>
-					<li>{{lesHackathons.dateFin|date('Y:m:d')}}</li>
-					<li>{{lesHackathons.lieu}}</li>
-					<li>{{lesHackathons.rue}}</li>
-					<li>{{lesHackathons.ville}}</li>
-					<li>{{lesHackathons.codePostal}}</li>
-					<li>{{lesHackathons.theme}}</li>
-					<li>{{lesHackathons.dateLimite|date('Y:m:d')}}</li>
-					<li>{{lesHackathons.nbPlaces}}</li>
+				<div class="row">
+    			<div class="col p-3 my-3">
+				<div class="card" style="width: 18rem;">
+				<h3 class="card-title">{{lesHackathons.theme}}</h3>
+					<h4>Début : {{lesHackathons.dateDebut|date('d:m:Y')}}</h4>
+					<h4>Heure de début : {{lesHackathons.heureDebut|date('H:i:s')}}</h4>
+					<h4>Fin : {{lesHackathons.dateFin|date('d:m:Y')}}</h4>
+					<h4>{{lesHackathons.lieu}} , {{lesHackathons.rue}},{{lesHackathons.ville}}, {{lesHackathons.codePostal}} </h4>
+					<h4>Date limite d'inscription : {{lesHackathons.dateLimite|date('Y:m:d')}}</h4>
+					<h4>Nombre de places total : {{lesHackathons.nbPlaces}}</h4>
+					<btn href="">En savoir plus</btn>
+				</div>
+				</div>
+				</div>
 				{% endfor %}
 			</ul>
-		</center>
 	</div>
 {% endblock %}
