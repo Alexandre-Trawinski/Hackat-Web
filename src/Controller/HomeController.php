@@ -31,4 +31,17 @@ class HomeController extends AbstractController
             'listeHackathons' => $lesHackathons,
         ]);
     }
+
+    /**
+     * @Route("/liste/{id}", name="hackathon")
+     */
+
+    public function afficherDetails($id): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $unHackathon = $repository->find($id);
+        return $this->render('home/hackathon.html.twig', [
+            'unHackathon' => $unHackathon,
+        ]);
+    }
 }
