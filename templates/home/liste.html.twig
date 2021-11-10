@@ -18,21 +18,23 @@
 	</style>
 
 
-<div class="row" style="margin-top: 100px;">
-{% for lesHackathons in listeHackathons %}
-    <div class="col col-lg-3 col-md-4 col-sm12">
-        <div class="card" style="width: 18rem;">
-			<div class="card-body">
-				<h3 class="card-title">{{lesHackathons.theme}}</h3>
-					<h4>{{lesHackathons.lieu}}, {{lesHackathons.ville}}, {{lesHackathons.codePostal}} </h4>
-					<button href="#">En savoir plus</button>
+	<div class="row" style="margin-top: 100px;">
+		{% for lesHackathons in listeHackathons %}
+			<div class="col col-lg-3 col-md-4 col-sm12">
+				<div class="card" style="width: 18rem;">
+					<img class="card-img-top" src="{{lesHackathons.image}}">
+					<div class="card-body">
+						<h4 class="card-title">{{lesHackathons.theme}}</h4>
+						<h6>{{lesHackathons.lieu}},
+							{{lesHackathons.ville}},
+							{{lesHackathons.codePostal}}
+						</h6>
+						<button href="#">En savoir plus</button>
+					</div>
+				</div>
 			</div>
-		</div>
-    </div>
-{% endfor %}
-</div>
-
-
+		{% endfor %}
+	</div>
 
 
 {% endblock %}
