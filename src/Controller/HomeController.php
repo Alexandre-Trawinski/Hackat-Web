@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Hackathon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,12 +10,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
      */
     public function index(): Response
     {
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+        ]);
+    }
+
+    /**
+     * @Route("/liste", name="liste")
+     */
+
+    public function AccesListe(): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $lesHackathons = $repository->findAll();
+        return $this->render('home/liste.html.twig', [
+            'listeHackathons' => $lesHackathons,
         ]);
     }
 }
