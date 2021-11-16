@@ -41,7 +41,7 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $unHackathon = $repository->find($id);
         return $this->render('home/hackathon.html.twig', [
-            'unHackathon' => $unHackathon,
+            'unHackathon' => $unHackathon
         ]);
     }
 }
