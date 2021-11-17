@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Hackathon;
+use App\Entity\Inscriptionhackathon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,9 +40,12 @@ class HomeController extends AbstractController
     public function afficherDetails($id): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $repo = $this->getDoctrine()->getRepository(Inscriptionhackathon::class);
         $unHackathon = $repository->find($id);
+        $lesInscriptions = $repo->findBy(['idhackathon'=>$id]);
+        $nbInscriptions=count($lesInscriptions);
         return $this->render('home/hackathon.html.twig', [
-            'unHackathon' => $unHackathon
+            'unHackathon' => $unHackathon, 'nbInscriptions'=>$nbInscriptions
         ]);
     }
 }
