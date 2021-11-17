@@ -19,6 +19,23 @@ class HackathonRepository extends ServiceEntityRepository
         parent::__construct($registry, Hackathon::class);
     }
 
+    public function trierParDate()
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.datedebut', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getVilleHackathon()
+    {
+        return $this->createQueryBuilder('v')
+            ->distinct('v.ville')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     // /**
     //  * @return Hackathon[] Returns an array of Hackathon objects
     //  */

@@ -27,9 +27,10 @@ class HomeController extends AbstractController
     public function AccesListe(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $lesHackathons = $repository->findAll();
+        $lesHackathons = $repository->trierParDate();
+        $lesVilles = $repository->getVilleHackathon();
         return $this->render('home/liste.html.twig', [
-            'listeHackathons' => $lesHackathons,
+            'listeHackathons' => $lesHackathons, 'listeVilles' => $lesVilles
         ]);
     }
 
@@ -42,10 +43,10 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $repo = $this->getDoctrine()->getRepository(Inscriptionhackathon::class);
         $unHackathon = $repository->find($id);
-        $lesInscriptions = $repo->findBy(['idhackathon'=>$id]);
-        $nbInscriptions=count($lesInscriptions);
+        $lesInscriptions = $repo->findBy(['idhackathon' => $id]);
+        $nbInscriptions = count($lesInscriptions);
         return $this->render('home/hackathon.html.twig', [
-            'unHackathon' => $unHackathon, 'nbInscriptions'=>$nbInscriptions
+            'unHackathon' => $unHackathon, 'nbInscriptions' => $nbInscriptions
         ]);
     }
 }
