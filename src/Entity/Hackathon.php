@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Hackathon
  *
  * @ORM\Table(name="hackathon")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=App\Repository\HackathonRepository::class)
  */
 class Hackathon
 {
@@ -253,6 +253,4 @@ class Hackathon
 
         return $this;
     }
-
-
 }
