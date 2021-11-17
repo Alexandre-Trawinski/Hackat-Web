@@ -55,14 +55,7 @@ class Inscriptionhackathon
      */
     private $idhackathon;
   
-    /*public function getPlacesRestantes($id)
-    {
-    $query->createQueryBuilder('inscription')
-            ->where('inscription.idHackathon = :id')
-            ->setParameter('id', $id);
-    $nbInscription = $query->getResult()->count();
-    return $nbInscription;
-    }*/
+    
     
         
 }

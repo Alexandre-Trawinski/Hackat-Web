@@ -47,5 +47,5 @@ class HackathonRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    
 }

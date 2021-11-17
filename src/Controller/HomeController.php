@@ -40,7 +40,7 @@ class HomeController extends AbstractController
     public function afficherDetails($id): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $repo = $this->getDoctrine()->getRepository(Inscriptionhackathon::class);
+        $repo=$this->getDoctrine()->getRepository(Inscriptionhackathon::class);
         $unHackathon = $repository->find($id);
         $lesInscriptions = $repo->findBy(['idhackathon'=>$id]);
         $nbInscriptions=count($lesInscriptions);
