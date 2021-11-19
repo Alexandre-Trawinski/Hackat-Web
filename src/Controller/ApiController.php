@@ -25,33 +25,32 @@ class ApiController extends AbstractController
     /**
      * @Route("/api/hackathons", name="hackathonAPI", methods="GET")
      */
-    public function hackathonApi():JsonResponse
+    public function hackathonApi(): JsonResponse
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $lesHackathons = $repository->findAll();
-        $TabJSON=[];
-        foreach($lesHackathons as $unHackathon)
-        {
-            $TabJSON = 
-            [
-                'Id'=>  $unHackathon->getIdhackathon(),
-                'dateDebut'=>  $unHackathon->getDatedebut(),
-                'heureDebut'=>  $unHackathon->getHeuredebut(),
-                'dateFin'=>  $unHackathon->getDatefin(),
-                'heureFin'=>  $unHackathon->getHeurefin(),
-                'lieu'=>  $unHackathon->getLieu(),
-                'rue'=>  $unHackathon->getRue(),
-                'ville'=>  $unHackathon->getVille(),
-                'CP'=>  $unHackathon->getCodepostal(),
-                'theme'=>  $unHackathon->getTheme(),
-                'dateLimite'=>  $unHackathon->getDatelimite(),
-                'nbPlaces'=>  $unHackathon->getNbplaces(),
-                'image'=>  $unHackathon->getImage(),
+        $TabJSON = [];
+        foreach ($lesHackathons as $unHackathon) {
+            $TabJSON[] =
+                [
+                    'Id' =>  $unHackathon->getIdhackathon(),
+                    'dateDebut' =>  $unHackathon->getDatedebut(),
+                    'heureDebut' =>  $unHackathon->getHeuredebut(),
+                    'dateFin' =>  $unHackathon->getDatefin(),
+                    'heureFin' =>  $unHackathon->getHeurefin(),
+                    'lieu' =>  $unHackathon->getLieu(),
+                    'rue' =>  $unHackathon->getRue(),
+                    'ville' =>  $unHackathon->getVille(),
+                    'CP' =>  $unHackathon->getCodepostal(),
+                    'theme' =>  $unHackathon->getTheme(),
+                    'dateLimite' =>  $unHackathon->getDatelimite(),
+                    'nbPlaces' =>  $unHackathon->getNbplaces(),
+                    'image' =>  $unHackathon->getImage(),
 
-            ];
-        } 
+                ];
+        }
 
-    return new JsonResponse($TabJSON);
+        return new JsonResponse($TabJSON);
     }
 
     /**
@@ -62,27 +61,25 @@ class ApiController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $leHackathon = $repository->find($id);
-        if (empty($leHackathon)){
-            return new JsonResponse(['message'=>'Hackathon not found'], Response::HTTP_NOT_FOUND);
+        if (empty($leHackathon)) {
+            return new JsonResponse(['message' => 'Hackathon not found'], Response::HTTP_NOT_FOUND);
         }
-			$TabJSON[] = [
-                'id'=>  $leHackathon->getIdhackathon(),
-                'dateDebut'=>  $leHackathon->getDatedebut(),
-                'heureDebut'=>  $leHackathon->getHeuredebut(),
-                'dateFin'=>  $leHackathon->getDatefin(),
-                'heureFin'=>  $leHackathon->getHeurefin(),
-                'lieu'=>  $leHackathon->getLieu(),
-                'rue'=>  $leHackathon->getRue(),
-                'ville'=>  $leHackathon->getVille(),
-                'CP'=>  $leHackathon->getCodepostal(),
-                'theme'=>  $leHackathon->getTheme(),
-                'dateLimite'=>  $leHackathon->getDatelimite(),
-                'nbPlaces'=>  $leHackathon->getNbplaces(),
-                'image'=>  $leHackathon->getImage(),
-            ];
+        $TabJSON[] = [
+            'id' =>  $leHackathon->getIdhackathon(),
+            'dateDebut' =>  $leHackathon->getDatedebut(),
+            'heureDebut' =>  $leHackathon->getHeuredebut(),
+            'dateFin' =>  $leHackathon->getDatefin(),
+            'heureFin' =>  $leHackathon->getHeurefin(),
+            'lieu' =>  $leHackathon->getLieu(),
+            'rue' =>  $leHackathon->getRue(),
+            'ville' =>  $leHackathon->getVille(),
+            'CP' =>  $leHackathon->getCodepostal(),
+            'theme' =>  $leHackathon->getTheme(),
+            'dateLimite' =>  $leHackathon->getDatelimite(),
+            'nbPlaces' =>  $leHackathon->getNbplaces(),
+            'image' =>  $leHackathon->getImage(),
+        ];
 
-            return new JsonResponse($TabJSON);
-        
+        return new JsonResponse($TabJSON);
     }
-   
 }
