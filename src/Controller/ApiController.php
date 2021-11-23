@@ -100,9 +100,10 @@ class ApiController extends AbstractController
             'login'=>$unParticipant->getLogin(),
             'password'=>$unParticipant->getPassword(),
             'portfolio'=>$unParticipant->getPortfolio(),
-
         ];
-        return new JsonResponse($TabJSON);
-
     }
+        return new JsonResponse($TabJSON);
+    }
+
+    
 }
