@@ -82,4 +82,27 @@ class ApiController extends AbstractController
 
         return new JsonResponse($TabJSON);
     }
+
+    public function lesParticipants(): JsonResponse
+    {
+        $repository=$this->getDoctrine()->getRepository(Participant::class);
+        $lesParticipants = $repository->findAll();
+        foreach ($lesParticipants as $unParticipant) {
+        $TabJSON[] = [
+            'id'=>$unParticipant->getIdparticipant(),
+            'nom'=>$unParticipant->getNom(),
+            'prenom'=>$unParticipant->getPrenom(),
+            'dateNaissance'=>$unParticipant->getDatenaissance(),
+            'rue'=>$unParticipant->getRue(),
+            'ville'=>$unParticipant->getVille(),
+            'mail'=>$unParticipant->getMail(),
+            'tel'=>$unParticipant->getTel(),
+            'login'=>$unParticipant->getLogin(),
+            'password'=>$unParticipant->getPassword(),
+            'portfolio'=>$unParticipant->getPortfolio(),
+
+        ];
+        return new JsonResponse($TabJSON);
+
+    }
 }
