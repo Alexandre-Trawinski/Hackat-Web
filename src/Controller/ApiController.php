@@ -84,13 +84,15 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/participants", name="unParticipant", methods="GET")
+     * @Route("/api/participants/{email}/{pwd}", name="unParticipant", methods="GET")
      */
 
-    public function lesParticipants(): JsonResponse
+    public function lesParticipants($email, $pwd): JsonResponse
     {
         $repository = $this->getDoctrine()->getRepository(Participant::class);
-        $lesParticipants = $repository->findAll();
+        $lesParticipants = $repository->findBy(
+            array('mail' => $email, 'password' => $pwd)
+        );
         foreach ($lesParticipants as $unParticipant) {
             $TabJSON[] = [
                 'id' => $unParticipant->getIdparticipant(),
