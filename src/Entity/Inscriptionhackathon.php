@@ -54,8 +54,6 @@ class Inscriptionhackathon
      * })
      */
     private $idhackathon;
-  
-    
-    
-        
+
+
 }

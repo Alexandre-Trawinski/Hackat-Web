@@ -112,5 +112,32 @@ class ApiController extends AbstractController
         return new JsonResponse($TabJSON);
     }
 
+    /**
+     * @Route("/api/hackathons/evenements", name="evenements", methods="GET")
+     */
+
+        public function lesEvenements()
+        {
+            $repository = $this->getDoctrine()->getRepository(Evenement::class);
+        $lesEvenements = $repository->findAll();
+        $TabJSON = [];
+        foreach ($lesEvenements as $unEvenement) {
+            $TabJSON[] =
+            [
+                'id'=>$unEvenement->getId(),
+                'libelle'=>$unEvenement->getLibelle(),
+                'date'=>$unEvenement->getDate(),
+                'heure'=>$unEvenement->getHeuredebut(),
+                'duree'=>$unEvenement->getDuree(),
+                'salle'=>$unEvenement->getSalle(),
+                'nbParticipants'=>$unEvenement->getNbparticipants(),
+                'intervenant'=>$unEvenement->getInterventant(),
+                'image'=>$unEvenement->getImage(),
+
+            ];
+        }
+        return new JsonResponse($TabJSON);
+    }
+        
     
 }
