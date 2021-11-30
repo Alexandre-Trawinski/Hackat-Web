@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Hackathon;
 use App\Entity\Participant;
+use App\Entity\Evenement;
 
 
 class ApiController extends AbstractController
@@ -120,7 +121,7 @@ class ApiController extends AbstractController
         public function lesEvenements($id)
         {
             $repo = $this->getDoctrine()->getRepository(Evenement::class);
-        $lesEvenements = $repo->findBy(['idHackathon'=>$id]);
+        $lesEvenements = $repo->findBy(['idhackathon'=>$id]);
         $TabEvenement = [];
         foreach ($lesEvenements as $unEvenement) {
             $TabEvenement[] =
@@ -132,7 +133,7 @@ class ApiController extends AbstractController
                 'duree'=>$unEvenement->getDuree(),
                 'salle'=>$unEvenement->getSalle(),
                 'nbParticipants'=>$unEvenement->getNbparticipants(),
-                'intervenant'=>$unEvenement->getInterventant(),
+                'intervenant'=>$unEvenement->getIntervenant(),
                 'image'=>$unEvenement->getImage(),
 
             ];

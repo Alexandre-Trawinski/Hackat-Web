@@ -50,4 +50,12 @@ class HomeController extends AbstractController
             'unHackathon' => $unHackathon, 'nbInscriptions' => $nbInscriptions
         ]);
     }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function Connexion(): Response
+    {
+        return $this->render('home/login.html.twig');
+    }
 }
