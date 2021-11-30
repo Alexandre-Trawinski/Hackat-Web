@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Participant
  *
- * @ORM\Table(name="participant")
+ * @ORM\Table(name="participant", uniqueConstraints={@ORM\UniqueConstraint(name="mail", columns={"mail"})})
  * @ORM\Entity
  */
 class Participant

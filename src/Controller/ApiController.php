@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Hackathon;
 use App\Entity\Participant;
+use App\Entity\Evenement;
 
 
 class ApiController extends AbstractController
@@ -109,6 +110,34 @@ class ApiController extends AbstractController
 
             ];
         }
+
         return new JsonResponse($TabJSON);
+    }
+
+    /**
+     * @Route("/api/hackathons/{id}/evenements", name="evenements", methods="GET")
+     */
+
+    public function lesEvenements($id)
+    {
+        $repo = $this->getDoctrine()->getRepository(Evenement::class);
+        $lesEvenements = $repo->findBy(['idhackathon' => $id]);
+        $TabEvenement = [];
+        foreach ($lesEvenements as $unEvenement) {
+            $TabEvenement[] =
+                [
+                    'id' => $unEvenement->getId(),
+                    'libelle' => $unEvenement->getLibelle(),
+                    'date' => $unEvenement->getDate(),
+                    'heure' => $unEvenement->getHeuredebut(),
+                    'duree' => $unEvenement->getDuree(),
+                    'salle' => $unEvenement->getSalle(),
+                    'nbParticipants' => $unEvenement->getNbparticipants(),
+                    'intervenant' => $unEvenement->getIntervenant(),
+                    'image' => $unEvenement->getImage(),
+
+                ];
+        }
+        return new JsonResponse($TabEvenement);
     }
 }

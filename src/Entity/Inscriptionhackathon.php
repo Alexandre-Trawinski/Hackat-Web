@@ -36,7 +36,7 @@ class Inscriptionhackathon
     private $dateinscription;
 
     /**
-     * @var \Participant
+     * @var Participant
      *
      * @ORM\ManyToOne(targetEntity="Participant")
      * @ORM\JoinColumns({
@@ -46,7 +46,7 @@ class Inscriptionhackathon
     private $idparticipant;
 
     /**
-     * @var \Hackathon
+     * @var Hackathon
      *
      * @ORM\ManyToOne(targetEntity="Hackathon")
      * @ORM\JoinColumns({
@@ -54,8 +54,57 @@ class Inscriptionhackathon
      * })
      */
     private $idhackathon;
-  
-    
-    
-        
+
+    public function getIdinscription(): ?int
+    {
+        return $this->idinscription;
+    }
+
+    public function getCompetence(): ?string
+    {
+        return $this->competence;
+    }
+
+    public function setCompetence(string $competence): self
+    {
+        $this->competence = $competence;
+
+        return $this;
+    }
+
+    public function getDateinscription(): ?\DateTimeInterface
+    {
+        return $this->dateinscription;
+    }
+
+    public function setDateinscription(\DateTimeInterface $dateinscription): self
+    {
+        $this->dateinscription = $dateinscription;
+
+        return $this;
+    }
+
+    public function getIdparticipant(): ?Participant
+    {
+        return $this->idparticipant;
+    }
+
+    public function setIdparticipant(?Participant $idparticipant): self
+    {
+        $this->idparticipant = $idparticipant;
+
+        return $this;
+    }
+
+    public function getIdhackathon(): ?Hackathon
+    {
+        return $this->idhackathon;
+    }
+
+    public function setIdhackathon(?Hackathon $idhackathon): self
+    {
+        $this->idhackathon = $idhackathon;
+
+        return $this;
+    }
 }
