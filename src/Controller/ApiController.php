@@ -80,7 +80,7 @@ class ApiController extends AbstractController
             'nbPlaces' =>  $leHackathon->getNbplaces(),
             'image' =>  $leHackathon->getImage(),
         ];
-        
+
         return new JsonResponse($TabJSON);
     }
 
@@ -110,7 +110,7 @@ class ApiController extends AbstractController
 
             ];
         }
-        
+
         return new JsonResponse($TabJSON);
     }
 
@@ -118,28 +118,26 @@ class ApiController extends AbstractController
      * @Route("/api/hackathons/{id}/evenements", name="evenements", methods="GET")
      */
 
-        public function lesEvenements($id)
-        {
-            $repo = $this->getDoctrine()->getRepository(Evenement::class);
-        $lesEvenements = $repo->findBy(['idhackathon'=>$id]);
+    public function lesEvenements($id)
+    {
+        $repo = $this->getDoctrine()->getRepository(Evenement::class);
+        $lesEvenements = $repo->findBy(['idhackathon' => $id]);
         $TabEvenement = [];
         foreach ($lesEvenements as $unEvenement) {
             $TabEvenement[] =
-            [
-                'id'=>$unEvenement->getId(),
-                'libelle'=>$unEvenement->getLibelle(),
-                'date'=>$unEvenement->getDate(),
-                'heure'=>$unEvenement->getHeuredebut(),
-                'duree'=>$unEvenement->getDuree(),
-                'salle'=>$unEvenement->getSalle(),
-                'nbParticipants'=>$unEvenement->getNbparticipants(),
-                'intervenant'=>$unEvenement->getIntervenant(),
-                'image'=>$unEvenement->getImage(),
+                [
+                    'id' => $unEvenement->getId(),
+                    'libelle' => $unEvenement->getLibelle(),
+                    'date' => $unEvenement->getDate(),
+                    'heure' => $unEvenement->getHeuredebut(),
+                    'duree' => $unEvenement->getDuree(),
+                    'salle' => $unEvenement->getSalle(),
+                    'nbParticipants' => $unEvenement->getNbparticipants(),
+                    'intervenant' => $unEvenement->getIntervenant(),
+                    'image' => $unEvenement->getImage(),
 
-            ];
+                ];
         }
         return new JsonResponse($TabEvenement);
     }
-        
-    
 }
