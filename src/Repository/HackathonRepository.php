@@ -30,7 +30,8 @@ class HackathonRepository extends ServiceEntityRepository
     public function getVilleHackathon()
     {
         return $this->createQueryBuilder('v')
-            ->distinct('v.ville')
+            ->select('v.ville')
+            ->distinct()
             ->getQuery()
             ->getResult();
     }
@@ -64,5 +65,4 @@ class HackathonRepository extends ServiceEntityRepository
         ;
     }
     */
-    
 }
