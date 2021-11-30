@@ -78,7 +78,7 @@ class Evenement
     private $image;
 
     /**
-     * @var \Hackathon
+     * @var Hackathon
      *
      * @ORM\ManyToOne(targetEntity="Hackathon")
      * @ORM\JoinColumns({
@@ -199,6 +199,4 @@ class Evenement
 
         return $this;
     }
-
-
 }
