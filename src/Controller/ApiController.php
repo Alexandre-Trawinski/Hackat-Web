@@ -79,7 +79,7 @@ class ApiController extends AbstractController
             'nbPlaces' =>  $leHackathon->getNbplaces(),
             'image' =>  $leHackathon->getImage(),
         ];
-
+        
         return new JsonResponse($TabJSON);
     }
 
@@ -109,20 +109,21 @@ class ApiController extends AbstractController
 
             ];
         }
+        
         return new JsonResponse($TabJSON);
     }
 
     /**
-     * @Route("/api/hackathons/evenements", name="evenements", methods="GET")
+     * @Route("/api/hackathons/{id}/evenements", name="evenements", methods="GET")
      */
 
-        public function lesEvenements()
+        public function lesEvenements($id)
         {
-            $repository = $this->getDoctrine()->getRepository(Evenement::class);
-        $lesEvenements = $repository->findAll();
-        $TabJSON = [];
+            $repo = $this->getDoctrine()->getRepository(Evenement::class);
+        $lesEvenements = $repo->findBy(['idHackathon'=>$id]);
+        $TabEvenement = [];
         foreach ($lesEvenements as $unEvenement) {
-            $TabJSON[] =
+            $TabEvenement[] =
             [
                 'id'=>$unEvenement->getId(),
                 'libelle'=>$unEvenement->getLibelle(),
@@ -136,7 +137,7 @@ class ApiController extends AbstractController
 
             ];
         }
-        return new JsonResponse($TabJSON);
+        return new JsonResponse($TabEvenement);
     }
         
     

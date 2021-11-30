@@ -7,6 +7,7 @@ use App\Entity\Inscriptionhackathon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\HackathonRepository;
 
 class HomeController extends AbstractController
 {

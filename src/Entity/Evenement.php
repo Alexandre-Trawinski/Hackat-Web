@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Hackathon;
 
 /**
  * Evenement
@@ -78,7 +79,7 @@ class Evenement
     private $image;
 
     /**
-     * @var \Hackathon
+     * @var Hackathon
      *
      * @ORM\ManyToOne(targetEntity="Hackathon")
      * @ORM\JoinColumns({

@@ -105,5 +105,154 @@ class Hackathon
      */
     private $image;
 
+    public function getIdhackathon(): ?int
+    {
+        return $this->idhackathon;
+    }
+
+    public function getDatedebut(): ?\DateTimeInterface
+    {
+        return $this->datedebut;
+    }
+
+    public function setDatedebut(\DateTimeInterface $datedebut): self
+    {
+        $this->datedebut = $datedebut;
+
+        return $this;
+    }
+
+    public function getHeuredebut(): ?\DateTimeInterface
+    {
+        return $this->heuredebut;
+    }
+
+    public function setHeuredebut(?\DateTimeInterface $heuredebut): self
+    {
+        $this->heuredebut = $heuredebut;
+
+        return $this;
+    }
+
+    public function getDatefin(): ?\DateTimeInterface
+    {
+        return $this->datefin;
+    }
+
+    public function setDatefin(?\DateTimeInterface $datefin): self
+    {
+        $this->datefin = $datefin;
+
+        return $this;
+    }
+
+    public function getHeurefin(): ?\DateTimeInterface
+    {
+        return $this->heurefin;
+    }
+
+    public function setHeurefin(?\DateTimeInterface $heurefin): self
+    {
+        $this->heurefin = $heurefin;
+
+        return $this;
+    }
+
+    public function getLieu(): ?string
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?string $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(?string $rue): self
+    {
+        $this->rue = $rue;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getCodepostal(): ?string
+    {
+        return $this->codepostal;
+    }
+
+    public function setCodepostal(?string $codepostal): self
+    {
+        $this->codepostal = $codepostal;
+
+        return $this;
+    }
+
+    public function getTheme(): ?string
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(string $theme): self
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function getDatelimite(): ?\DateTimeInterface
+    {
+        return $this->datelimite;
+    }
+
+    public function setDatelimite(?\DateTimeInterface $datelimite): self
+    {
+        $this->datelimite = $datelimite;
+
+        return $this;
+    }
+
+    public function getNbplaces(): ?int
+    {
+        return $this->nbplaces;
+    }
+
+    public function setNbplaces(?int $nbplaces): self
+    {
+        $this->nbplaces = $nbplaces;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
 
 }
