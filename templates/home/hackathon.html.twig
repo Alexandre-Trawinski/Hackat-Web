@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+
+	<div class="row" style="margin-top: 100px;">
+		<div class="card" style="width: 18rem;">
+			<img class="card-img-top" src="{{unHackathon.image}}">
+			<div class="card-body">
+				<h3 class="card-title">{{unHackathon.theme}}</h3>
+				<p>Date du début de l'évènement :
+					{{unHackathon.dateDebut |date('d/m/Y')}}
+				</p>
+				<p>Date de fin de l'évènement :
+					{{unHackathon.dateFin|date('d/m/Y')}}
+				</p>
+				<p>Heure d'ouverture de l'évènement :
+					{{unHackathon.heureDebut|date('h:i')}}
+				</p>
+				<p>Date limite d'inscription :
+					{{unHackathon.dateLimite|date('d/m/Y')}}
+				</p>
+				<p>{{unHackathon.lieu}},
+					{{unHackathon.rue}},
+					{{unHackathon.ville}},
+					{{unHackathon.codePostal}}
+				</p>
+				<p>{{unHackathon.nbPlaces-nbInscriptions}}
+					places restantes
+				</p>
+				<button class="btn btn-success" href="#">S'inscrire</button>
+			</div>
+		</div>
+	</div>
+
+</div>{% endblock %}
