@@ -129,7 +129,7 @@ class ApiController extends AbstractController
                     'id' => $unEvenement->getId(),
                     'libelle' => $unEvenement->getLibelle(),
                     'date' => $unEvenement->getDate(),
-                    'heure' => $unEvenement->getHeuredebut(),
+                    'heureDebut' => $unEvenement->getHeuredebut(),
                     'duree' => $unEvenement->getDuree(),
                     'salle' => $unEvenement->getSalle(),
                     'nbParticipants' => $unEvenement->getNbparticipants(),

@@ -9,8 +9,8 @@
 		<div class="row" style="margin-top: 100px;">
 			<center>
 				<h1>Liste des Villes</h1>
-				{% for lesHackathons in listeHackathons %}
-					<a href="" class="btn btn-primary">{{lesHackathons.ville}}</a>
+				{% for uneVille in listeVilles %}
+					<a href="{{path('ListeHackathonsByVille', {'ville':uneVille.ville})}}" class="btn btn-primary">{{uneVille.ville}}</a>
 				{% endfor %}
 			</center>
 		</div>

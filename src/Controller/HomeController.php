@@ -36,7 +36,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/liste/{id}", name="hackathon")
+     * @Route("/liste/{id}", name="hackathon", requirements={"id"="\d+"})
      */
 
     public function afficherDetails($id): Response
@@ -52,7 +52,18 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="login")
+     * @Route("/liste/{ville}", name="ListeHackathonsByVille")
+     */
+    public function ListeHackathonsByVille($ville): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $listeVilles = $repository->getVilleHackathon();
+        $listeHackathons = $repository->findBy(['ville' => $ville]);
+        return $this->render('home/liste.html.twig', ['listeHackathons' => $listeHackathons, 'listeVilles' => $listeVilles]);
+    }
+
+    /**
+     *  @Route("/login", name="login")
      */
     public function Connexion(): Response
     {
