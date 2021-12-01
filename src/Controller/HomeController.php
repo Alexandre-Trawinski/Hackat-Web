@@ -63,7 +63,10 @@ class HomeController extends AbstractController
      * @Route("/creerCompte", name="creerCompte")
      */
     public function CreerCompte(): Response
-    {
+    {   
+
+
+        
         return $this->render('home/addCompte.html.twig');
     }
 }
