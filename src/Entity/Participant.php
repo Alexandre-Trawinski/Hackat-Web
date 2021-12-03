@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -77,13 +76,6 @@ class Participant
      * @ORM\Column(name="tel", type="string", length=20, nullable=false)
      */
     private $tel;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=255, nullable=false)
-     */
-    private $login;
 
     /**
      * @var string
@@ -196,18 +188,6 @@ class Participant
     public function setTel(string $tel): self
     {
         $this->tel = $tel;
-
-        return $this;
-    }
-
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(string $login): self
-    {
-        $this->login = $login;
 
         return $this;
     }
