@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+ 
+{% block title %}Créez votre compte
+{% endblock %}
+ 
+ 
+{% block body %}
+    <div class="container">
+        {{form_start(monForm)}}
+        {{form_row(monForm.nom)}}
+        {{form_row(monForm.prenom)}}
+        {{form_row(monForm.datenaissance)}}
+        {{form_row(monForm.rue)}}
+        {{form_row(monForm.ville)}}
+        {{form_row(monForm.codepostal)}}
+        {{form_row(monForm.mail)}}
+        {{form_row(monForm.login)}}
+        {{form_row(monForm.tel)}}
+        {{form_row(monForm.password)}}
+        {{form_row(monForm.portfolio)}}
+        <br>
+        <input type="submit" class="btn btn-primary"value="Ajouter">
+        {{form_end(monForm)}}
+ 
+    </div>
+{% endblock %}
+
+
