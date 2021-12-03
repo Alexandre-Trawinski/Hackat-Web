@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Hackathon;
+use App\Form\CompteType;
+use App\Entity\Participant;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Inscriptionhackathon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,13 +74,22 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/creerCompte", name="creerCompte")
+     * @Route("/addCompte", name="addCompte")
      */
-    public function CreerCompte(): Response
-    {   
-
-
-        
-        return $this->render('home/addCompte.html.twig');
+    public function addCompte(Request $request): Response
+    {
+        $unParticipant=new Participant();
+        $form = $this->createForm(CompteType::class, $unParticipant);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($unParticipant);
+            $em->flush();
+            return $this->redirectToRoute('login');
+        }
+        return $this->render('addCompte/index.html.twig', [
+            'monForm' => $form->createView(),
+        ]);
     }
+
 }
