@@ -78,12 +78,7 @@ class Participant
      */
     private $tel;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=255, nullable=false)
-     */
-    private $login;
+  
 
     /**
      * @var string
@@ -200,17 +195,6 @@ class Participant
         return $this;
     }
 
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(string $login): self
-    {
-        $this->login = $login;
-
-        return $this;
-    }
 
     public function getPassword(): ?string
     {
