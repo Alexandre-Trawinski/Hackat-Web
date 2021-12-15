@@ -7,19 +7,26 @@
 
 <h1>CONNEXION</h1>
 
-<form method="post">
+<form action="{{ path('login') }}" method="post">
     <div class="col-12">
     <label for="username">Login</label>
-    <input type="text" id="login" name="login"/>
+    <input type="text" id="login" name="_username" value="{{last_username}}"/>
     </div>
 
     <div class="col-12">
     <label for="password">Mot de passe:</label>
-    <input type="password" id="password" name="password"/>
+    <input type="password" id="password" name="_password"/>
     </div>
 
-    <button class="btn btn-primary"type="submit">Connexion</button>
+    <button class="btn btn-primary" type="submit">Connexion</button>
 </form>
 <a href="addCompte"> Pas de compte ? Créez un compte</a>
+
+{% if errors %}
+ <div class="alert alert-danger">
+ {{ errors.messageKey|trans(errors.messageData, 'security') }}
+ </div>
+{% endif %}
+<form action="{{ path('login') }}" method="post">
 
 {% endblock %}

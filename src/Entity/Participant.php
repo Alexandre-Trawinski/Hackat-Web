@@ -196,7 +196,7 @@ class Participant
     }
 
 
-    public function getPassword(): ?string
+    /*public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -206,7 +206,7 @@ class Participant
         $this->password = $password;
 
         return $this;
-    }
+    }*/
 
     public function getPortfolio(): ?string
     {
@@ -220,5 +220,51 @@ class Participant
         return $this;
     }
 
+/**
+ * @ORM\Column(type="json")
+ */
+private $roles = [];
+/**
+* A visual identifier that represents this user.
+* @see UserInterface
+*/
+public function getUserIdentifier(): string
+{
+    return (string) $this->login;
+}
+public function getRoles(): array
+{
+    $roles = $this->roles;
+
+    $roles[] = 'ROLE_USER';
+    return array_unique($roles);
+}
+public function setRoles(array $roles): self
+{
+    $this->roles = $roles;
+    return $this;
+}
+
+/**
+ * @see PasswordAuthenticatedUserInterface
+ */
+public function getPassword(): string
+{
+return $this->password;
+}
+
+public function setPassword(string $password): self
+{
+$this->password = $password;
+return $this;
+}
+
+/**
+* @see UserInterface
+*/
+public function getSalt(): ?string
+{
+    return null;
+}
 
 }
