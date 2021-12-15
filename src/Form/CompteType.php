@@ -21,7 +21,6 @@ class CompteType extends AbstractType
             ->add('codepostal')
             ->add('mail')
             ->add('tel')
-            ->add('login')
             ->add('password')
             ->add('portfolio')
         ;
