@@ -135,7 +135,7 @@ class ApiController extends AbstractController
                     'nbParticipants' => $unEvenement->getNbparticipants(),
                     'intervenant' => $unEvenement->getIntervenant(),
                     'image' => $unEvenement->getImage(),
-
+                    'type' => $unEvenement->getType(),
                 ];
         }
         return new JsonResponse($TabEvenement);

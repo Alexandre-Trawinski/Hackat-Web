@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Hackathon;
 
 /**
  * Evenement
@@ -77,6 +76,13 @@ class Evenement
      * @ORM\Column(name="image", type="string", length=500, nullable=false)
      */
     private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=200, nullable=false)
+     */
+    private $type;
 
     /**
      * @var Hackathon
@@ -185,6 +191,18 @@ class Evenement
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

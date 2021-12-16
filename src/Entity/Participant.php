@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -78,7 +77,7 @@ class Participant
      */
     private $tel;
 
-  
+
 
     /**
      * @var string
