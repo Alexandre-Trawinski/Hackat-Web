@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\HackathonRepository;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class HomeController extends AbstractController
 {
@@ -68,7 +69,17 @@ class HomeController extends AbstractController
     /**
      *  @Route("/login", name="login")
      */
-    public function Connexion(): Response
+    public function Connexion(AuthenticationUtils $authenticationUtils): Response
+    {
+        $lastUsername=$authenticationUtils->getLastUsername();
+        $errors=$authenticationUtils->getLastAuthenticationError();
+        return $this->render('home/login.html.twig',['lastUsername'=>$lastUsername, 'errors'=>$errors]);
+    }
+
+    /**
+     *  @Route("/logout", name="logout")
+     */
+    public function logout(): Response
     {
         return $this->render('home/login.html.twig');
     }

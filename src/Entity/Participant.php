@@ -192,7 +192,8 @@ class Participant
         return $this;
     }
 
-    public function getPassword(): ?string
+
+    /*public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -202,7 +203,7 @@ class Participant
         $this->password = $password;
 
         return $this;
-    }
+    }*/
 
     public function getPortfolio(): ?string
     {
@@ -215,6 +216,4 @@ class Participant
 
         return $this;
     }
-
-
 }
