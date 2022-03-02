@@ -26,6 +26,15 @@ class Inscriptionmobile
      *
      * @ORM\Column(name="idEvenement", type="integer", nullable=false)
      */
+
+    /**
+     * @var Evenement
+     *
+     * @ORM\ManyToOne(targetEntity="Evenement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idEvenement", referencedColumnName="id")
+     * })
+     */
     private $idevenement;
 
     /**
@@ -54,12 +63,12 @@ class Inscriptionmobile
         return $this->id;
     }
 
-    public function getIdevenement(): ?int
+    public function getIdevenement(): ?Evenement
     {
         return $this->idevenement;
     }
 
-    public function setIdevenement(int $idevenement): self
+    public function setIdevenement(Evenement $idevenement): self
     {
         $this->idevenement = $idevenement;
 
@@ -101,6 +110,4 @@ class Inscriptionmobile
 
         return $this;
     }
-
-
 }

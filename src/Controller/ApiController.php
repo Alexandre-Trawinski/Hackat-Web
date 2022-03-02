@@ -5,11 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Hackathon;
 use App\Entity\Participant;
 use App\Entity\Evenement;
-
+use App\Entity\Inscriptionmobile;
+use App\Repository\EvenementRepository;
+use App\Repository\HackathonRepository;
+use Symfony\Component\Serializer\Encoder\JsonDecode;
 
 class ApiController extends AbstractController
 {
@@ -30,6 +34,7 @@ class ApiController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $lesHackathons = $repository->findAll();
+        dump($lesHackathons);
         $TabJSON = [];
         foreach ($lesHackathons as $unHackathon) {
             $TabJSON[] =
@@ -139,5 +144,35 @@ class ApiController extends AbstractController
                 ];
         }
         return new JsonResponse($TabEvenement);
+    }
+
+    /**
+     * @Route("/api/hackathons/evenements/{id}/inscriptionAtelier", name="inscriptionAtelier", methods="POST")
+     */
+
+    public function inscriptionAtelier(Request $request, $id)
+    {
+
+
+        $donnees = $request->getContent();
+        dump($donnees);
+        $user = json_decode($donnees, true);
+        dump($user);
+        $nom = $user['nom'];
+        dump($nom);
+        $prenom = $user['prenom'];
+        $email = $user['email'];
+        $uneInscription = new Inscriptionmobile();
+        $repository = $this->getDoctrine()->getRepository(Evenement::class);
+        $unEvenement = $repository->find($id);
+        $uneInscription->setIdevenement($unEvenement);
+        $uneInscription->setNom($nom);
+        $uneInscription->setPrenom($prenom);
+        $uneInscription->setEmail($email);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($uneInscription);
+        $em->flush();
+
+        return new JsonResponse($user);
     }
 }
