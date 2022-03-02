@@ -32,8 +32,13 @@
 							<a class="nav-link" href="/liste">Liste des hackathons</a>
 						</li>
 					</ul>
-					
+					{% if login is defined %}
+					<a>{{login}}</a>
+					<a class="btn btn-outline-danger"href="/logout">Déconnexion</a>
+					{% else %}
 					<a class="btn btn-outline-primary"href="/login">Connexion</a>
+					{% endif %}
+					
 				</div>
 			</nav>
 			{% block body %}{% endblock %}

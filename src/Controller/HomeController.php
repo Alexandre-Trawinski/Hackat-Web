@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\HackathonRepository;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+use function PHPUnit\Framework\isNull;
+
 class HomeController extends AbstractController
 {
     /**
@@ -69,19 +71,37 @@ class HomeController extends AbstractController
     /**
      *  @Route("/login", name="login")
      */
-    public function Connexion(AuthenticationUtils $authenticationUtils): Response
+    public function Login(): Response
     {
-        $lastUsername=$authenticationUtils->getLastUsername();
-        $errors=$authenticationUtils->getLastAuthenticationError();
-        return $this->render('home/login.html.twig',['lastUsername'=>$lastUsername, 'errors'=>$errors]);
+        return $this->render('home/login.html.twig');
     }
+    
+    /**
+     *  @Route("/login/{email};{password}" , name="loginPassword")
+     */
+
+    /*public function Connexion($email, $password): Response
+    {
+        $algo = 'sha512';
+        hash($algo, $password);
+        $repository = $this->getDoctrine()->getRepository(Participant::class);
+        $leParticipant = $repository->findOneBy(['mail'=>$email, 'password'=>$password]);
+        if(isNull($leParticipant)==true)
+        {
+            echo("Ce login ne correspond à aucune utilisateur ou votre mot de passe est incorrect");
+            return $this->redirectToRoute('login');
+        }
+        
+        return $this->redirectToRoute('home');
+        return $this->render('base.html.twig',['login'=>$email]);
+    }*/
 
     /**
      *  @Route("/logout", name="logout")
      */
-    public function logout(): Response
+    public function logout($login): Response
     {
-        return $this->render('home/login.html.twig');
+        return $this->redirectToRoute('home');
     }
 
     /**

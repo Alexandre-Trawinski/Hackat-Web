@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Participant
@@ -193,7 +194,7 @@ class Participant
     }
 
 
-    /*public function getPassword(): ?string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -203,7 +204,7 @@ class Participant
         $this->password = $password;
 
         return $this;
-    }*/
+    }
 
     public function getPortfolio(): ?string
     {
@@ -216,4 +217,7 @@ class Participant
 
         return $this;
     }
+    public function getRoles() { return ['ROLE_USER']; }
+    public function eraseCredentials() {}
+    public function getSalt() {}
 }
