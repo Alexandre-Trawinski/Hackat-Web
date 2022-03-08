@@ -7,16 +7,22 @@
 {% block body %}
     <div class="container">
     {{form_start(monForm)}}
-        {{form_start(monForm)}}
-        {{form_row(monForm.nom)}}
-        {{form_row(monForm.prenom)}}
+        <div class="row">
+            {{form_start(monForm)}}
+            <a class="mt-5">{{form_row(monForm.nom)}}</a> 
+            <a class="mt-5 ml-2">{{form_row(monForm.prenom)}}</a>
+        </div>
         {{form_row(monForm.datenaissance)}}
-        {{form_row(monForm.rue)}}
-        {{form_row(monForm.ville)}}
-        {{form_row(monForm.codepostal)}}
-        {{form_row(monForm.mail)}}
-        {{form_row(monForm.tel)}}
-        {{form_row(monForm.password)}}
+        <div class="row">
+        <a class="ml-2">{{form_row(monForm.rue)}}</a>
+        <a class="ml-2">{{form_row(monForm.ville)}}</a>
+        <a class="ml-2">{{form_row(monForm.codepostal)}}</a>
+        </div>
+        <div class="row">
+        <a class="ml-2">{{form_row(monForm.mail)}}</a>
+        <a class="ml-2">{{form_row(monForm.tel)}}</a>
+        <a class="ml-2">{{form_row(monForm.password)}}</a>
+        </div>
         {{form_row(monForm.portfolio)}}
         <br>
         <input type="submit" class="btn btn-primary"value="Ajouter">

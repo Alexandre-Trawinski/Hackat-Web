@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Participant
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="participant", uniqueConstraints={@ORM\UniqueConstraint(name="mail", columns={"mail"})})
  * @ORM\Entity
  */
-class Participant
+class Participant implements UserInterface
 {
     /**
      * @var int
@@ -215,5 +216,23 @@ class Participant
         $this->portfolio = $portfolio;
 
         return $this;
+    }
+    public function getRoles() { return ['ROLE_USER']; }
+
+    public function setRoles(array $roles): self
+    {
+    $this->roles = $roles;
+    return $this;
+    }
+    public function eraseCredentials() {}
+    public function getSalt() {return null;}
+
+    /**
+    * A visual identifier that represents this user.
+    * @see UserInterface
+    */
+    public function getUsername(): string
+    {
+    return (string) $this->mail;
     }
 }
