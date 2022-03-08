@@ -71,16 +71,21 @@ class HomeController extends AbstractController
     /**
      *  @Route("/login", name="login")
      */
-    public function Login(): Response
+    public function Login(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('home/login.html.twig');
+        $lastUsername=$authenticationUtils->getLastUsername();
+        $errors=$authenticationUtils->getLastAuthenticationError();
+        dump($authenticationUtils);
+        return $this->render('home/login.html.twig', ['lastUsername'=>$lastUsername, 'errors'=>
+        $errors]);
+        return $this->render('base.html.twig', ['lastUsername'=>$lastUsername]);
     }
     
     /**
      *  @Route("/login/{email};{password}" , name="loginPassword")
      */
 
-    /*public function Connexion($email, $password): Response
+    public function Connexion($email, $password): Response
     {
         $algo = 'sha512';
         hash($algo, $password);
@@ -88,13 +93,13 @@ class HomeController extends AbstractController
         $leParticipant = $repository->findOneBy(['mail'=>$email, 'password'=>$password]);
         if(isNull($leParticipant)==true)
         {
-            echo("Ce login ne correspond à aucune utilisateur ou votre mot de passe est incorrect");
+            echo("Ce login ne correspond a aucun utilisateur ou votre mot de passe est incorrect");
             return $this->redirectToRoute('login');
         }
         
         return $this->redirectToRoute('home');
         return $this->render('base.html.twig',['login'=>$email]);
-    }*/
+    }
 
     /**
      *  @Route("/logout", name="logout")
@@ -122,5 +127,4 @@ class HomeController extends AbstractController
             'monForm' => $form->createView(),
         ]);
     }
-
 }

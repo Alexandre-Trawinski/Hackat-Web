@@ -1,7 +1,7 @@
 security:
         encoders:
-            App\Entity\Person:
-                algorithm: bcrypt
+            App\Entity\Participant:
+                algorithm: plaintext
     # https://symfony.com/doc/current/security/authenticator_manager.html
         enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#c-hashing-passwords
@@ -24,11 +24,11 @@ security:
                 #anonymous: true    
                 provider: in_database
                 form_login:
-                    login_path: loginPassword
-                    check_path: loginPassword
+                    login_path: login
+                    check_path: login
                 logout:
                     path: logout
-                    target: participant_index
+                    target: home
 
         #encoders:
             #App\Entity\Participant:
