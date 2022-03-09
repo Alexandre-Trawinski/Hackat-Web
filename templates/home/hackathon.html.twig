@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{asset("js/index.js")}}"></script>
+{% endblock %}
+
 {% block title %}Hello HomeController!
 {% endblock %}
 
@@ -27,10 +32,16 @@
 					{{unHackathon.ville}},
 					{{unHackathon.codePostal}}
 				</p>
-				<p>{{unHackathon.nbPlaces-nbInscriptions}}
+				<p id="nbPlaces">{{unHackathon.nbPlaces-nbInscriptions}}
 					places restantes
 				</p>
-				<button class="btn btn-success" href="#">S'inscrire</button>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<a class="btn btn-success" href="{{path('inscription', {'id':unHackathon.idHackathon})}}" id="inscription">S'inscrire</a>
+				{% else %}
+					<a>S'inscrire :</a>
+					<a class="btn btn-success" href="login">Se connecter</a>
+				{% endif %}
+				
 			</div>
 		</div>
 	</div>
