@@ -6,19 +6,19 @@
 {% block body %}
 
 	<div class="container">
-		<div class="row" style="margin-top: 100px;">
-			<center>
+		<div class="row" style="margin-top: 100px; width:100%">
+			<div style="width:100%">
 				<h1>Liste des Villes</h1>
 				{% for uneVille in listeVilles %}
-					<a href="{{path('ListeHackathonsByVille', {'ville':uneVille.ville})}}" class="btn btn-primary">{{uneVille.ville}}</a>
+					<a href="{{path('ListeHackathonsByVille', {'ville':uneVille.ville})}}" class="btn btn-primary" style="margin-right:5px">{{uneVille.ville}}</a>
 				{% endfor %}
-			</center>
+			</div>
 		</div>
 	</div>
 
 	<div class="row" style="margin-top: 100px;">
 		{% for lesHackathons in listeHackathons %}
-			<div class="col col-lg-3 col-md-4 col-sm12">
+			<div class="col col-lg-3 col-md-4 col-sm12" style="margin-top: 50px;">
 				<div class="card" style="width: 18rem;">
 					<img class="card-img-top" src="{{lesHackathons.image}}">
 					<div class="card-body">
