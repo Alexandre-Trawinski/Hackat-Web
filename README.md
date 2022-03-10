@@ -17,6 +17,11 @@ Pour installer Composer, il suffit de se rendre sur le site de [Composer](https:
 git clone https://github.com/Alexandre-Trawinski/Hackat-Web.git
 
 ```
+>  Exécutez la commande suivante dans votre terminal :
+
+```bash
+composer install
+```
 
 > Dans votre terminal lancer la commande suivante :
 
