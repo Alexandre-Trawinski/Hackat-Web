@@ -34,11 +34,11 @@
 							</li>
 						</ul>
 						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-							<a style="color:white">{{ app.user.nom }}
+							<a style="color:white; margin-right:5%;">{{ app.user.nom }}
 								{{app.user.prenom}}</a>
 							<a class="btn btn-danger" href="{{path('logout')}}">Se déconnecter</a>
 						{% else %}
-							<a class="btn btn" href="{{path('login')}}" style="background-color: #CC4B2C; color:white;">Se connecter</a>
+							<a class="btn btn" href="{{path('login')}}" style="background-color: #2ABA2D; color:white;">Se connecter</a>
 						{% endif %}
 					</div>
 				</nav>

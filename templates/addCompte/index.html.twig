@@ -5,29 +5,44 @@
  
  
 {% block body %}
-    <div class="container">
-    {{form_start(monForm)}}
-        <div class="row">
+    <div class="container" style="margin-top:5%; margin-bottom:5%;">
+
             {{form_start(monForm)}}
-            <a class="mt-5">{{form_row(monForm.nom)}}</a> 
-            <a class="mt-5 ml-2">{{form_row(monForm.prenom)}}</a>
-        </div>
-        {{form_row(monForm.datenaissance)}}
-        <div class="row">
-        <a class="ml-2">{{form_row(monForm.rue)}}</a>
-        <a class="ml-2">{{form_row(monForm.ville)}}</a>
-        <a class="ml-2">{{form_row(monForm.codepostal)}}</a>
-        </div>
-        <div class="row">
-        <a class="ml-2">{{form_row(monForm.mail)}}</a>
-        <a class="ml-2">{{form_row(monForm.tel)}}</a>
-        <a class="ml-2">{{form_row(monForm.password)}}</a>
-        </div>
-        {{form_row(monForm.portfolio)}}
-        <br>
-        <input type="submit" class="btn btn-primary"value="Ajouter">
-        {{form_end(monForm)}}
- 
+
+                <div class="form-control" style="background-color: #CC4B2C; border-radius: 1rem; padding-left:10%; padding-right:10%; padding-top:3%; padding-bottom:3%;">
+                    <b class="fa fa-calendar" style="color:white;">Nom</b>
+                    {{ form_widget(monForm.nom) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Prénom</b> 
+                    {{ form_widget(monForm.prenom) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Date de naissance</b> 
+                    {{ form_widget(monForm.datenaissance) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Rue</b>
+                    {{ form_widget(monForm.rue) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Ville</b>
+                    {{ form_widget(monForm.ville) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Code postal</b> 
+                    {{ form_widget(monForm.codepostal) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Mail</b> 
+                    {{ form_widget(monForm.mail) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Téléphone</b> 
+                    {{ form_widget(monForm.tel) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Mot de passe</b> 
+                    {{ form_widget(monForm.password) }}
+                    <br>
+                    <b class="fa fa-calendar" style="color:white;">Portfolio</b> 
+                    {{ form_widget(monForm.portfolio) }}
+                    <br>
+                    <input type="submit" class="btn btn-dark btn-lg btn-block" style="margin-top:2%; margin-bottom:2%" value="Ajouter">
+                </div>                
+            {{form_end(monForm)}}
     </div>
 {% endblock %}
 

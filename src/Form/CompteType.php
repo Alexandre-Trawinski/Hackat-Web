@@ -7,7 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Form\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class CompteType extends AbstractType
 {
@@ -16,13 +17,17 @@ class CompteType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('datenaissance')
+            ->add('datenaissance', DateType::class, array(
+                "widget" => 'single_text',
+                "format" => 'yyyy-MM-dd',
+                "data" => new \DateTime()
+            ))
             ->add('rue')
             ->add('ville')
             ->add('codepostal')
             ->add('mail')
             ->add('tel')
-            ->add('password')
+            ->add('password', PasswordType::class)
             ->add('portfolio')
         ;
     }
