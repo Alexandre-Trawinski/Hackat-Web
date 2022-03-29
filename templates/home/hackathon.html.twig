@@ -23,7 +23,7 @@
 				<p>Heure d'ouverture de l'évènement :
 					{{unHackathon.heureDebut|date('h:i')}}
 				</p>
-				<p>Date limite d'inscription :
+				<p id="dateLimite" data-datelimite='{{unHackathon.dateLimite|date('Y-m-d')}}'>Date limite d'inscription :
 					{{unHackathon.dateLimite|date('d/m/Y')}}
 				</p>
 				<p>{{unHackathon.lieu}},
@@ -31,7 +31,8 @@
 					{{unHackathon.ville}},
 					{{unHackathon.codePostal}}
 				</p>
-				<p id="nbPlaces">{{unHackathon.nbPlaces-nbInscriptions}}
+				<p id="nbPlaces" data-nbplaces='{{unHackathon.nbPlaces}}'>
+					{{unHackathon.nbPlaces}}
 					places restantes
 				</p>
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -40,7 +41,7 @@
 					<a>S'inscrire :</a>
 					<a class="btn btn-success" href="/login">Se connecter</a>
 				{% endif %}
-				
+
 			</div>
 		</div>
 	</div>
