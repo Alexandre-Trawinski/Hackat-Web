@@ -14,17 +14,17 @@
 			<img class="card-img-top" src="{{unHackathon.image}}">
 			<div class="card-body">
 				<h3 class="card-title">{{unHackathon.theme}}</h3>
-				<p>Date du début de l'évènement :
+				<p>Début de l'événement :
 					{{unHackathon.dateDebut |date('d/m/Y')}}
+					{{unHackathon.heureDebut|date('H:i')}}
 				</p>
-				<p>Date de fin de l'évènement :
+				<p>Fin de l'événement :
 					{{unHackathon.dateFin|date('d/m/Y')}}
+					{{unHackathon.heureFin|date('H:i')}}
 				</p>
-				<p>Heure d'ouverture de l'évènement :
-					{{unHackathon.heureDebut|date('h:i')}}
-				</p>
+
 				<p id="dateLimite" data-datelimite='{{unHackathon.dateLimite|date('Y-m-d')}}'>Date limite d'inscription :
-					{{unHackathon.dateLimite|date('d/m/Y')}}
+					{{unHackathon.dateLimite|date('d/m/Y H:i')}}
 				</p>
 				<p>{{unHackathon.lieu}},
 					{{unHackathon.rue}},

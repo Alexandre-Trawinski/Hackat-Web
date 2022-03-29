@@ -6,6 +6,10 @@ var dateLimiteHackathon = document.getElementById("dateLimite").dataset.datelimi
 var dateNow = new Date();
 dateLimiteHackathon = new Date(dateLimiteHackathon);
 
+console.log("Now : ", dateNow)
+console.log("Limite : ", dateLimiteHackathon)
+
+
 if (dateNow > dateLimiteHackathon || nbPlaces == 0) {
     btn.setAttribute('href', '#');
 }
