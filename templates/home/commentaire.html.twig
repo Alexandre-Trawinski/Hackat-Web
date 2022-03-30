@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+
+	<section class="vh-100">
+		<div class="container py-5 h-100">
+			<div class="row d-flex justify-content-center align-items-center h-100" style="margin-top:100px;">
+				<div class="col col-xl-10">
+					<div class="card" style="background-color: #CC4B2C; border-radius: 1rem;">
+						<div>
+							<div class="col-md-6 col-lg-7 d-flex align-items-center">
+								<div class="card-body p-4 p-lg-5 text-black">
+
+									<form action="" method="post" style="color:white;">
+
+										<div class="align-items-center mb-3 pb-1">
+											<p class="h1 fw-bold">Commentaires</p>
+										</div>
+
+										<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Laisser un commentaire</h5>
+
+										<div class="form-outline mb-4">
+											<input type="email" id="form2Example17" name="_username" class="form-control form-control-lg" style="margin-bottom:10px;"/>
+											<label class="form-label" for="form2Example17">Titre</label>
+										</div>
+
+										<div class="form-outline mb-4">
+											<input  id="form2Example27"  class="form-control form-control-lg" style="margin-bottom:10px;"/>
+											<label class="form-label" for="form2Example27">Contenu</label>
+										</div>
+
+										<div class="pt-1 mb-4">
+											<button class="btn btn-dark btn-lg btn-block" type="submit">Publier</button>
+										</div>
+										<a href="voirCommentaires" style="color: white;">Voir les commentaires</a>
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
