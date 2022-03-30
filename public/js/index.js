@@ -1,33 +1,15 @@
-var nbPlace = document.getElementById("inscription")
-var dateHackathon = document.getElementById("");
 var btn = document.getElementById("inscription");
+var nbPlaces = document.getElementById("nbPlaces").dataset.nbplaces;
+var dateLimiteHackathon = document.getElementById("dateLimite").dataset.datelimite;
 
-function date(event)
-{
-    var dateNow = Date.now();
-    if(dateNow>dateHackathon)
-    {
-        btn.disabled=true;
-    }
-    else
-    {
-        btn.disabled=false;
-    }
 
+var dateNow = new Date();
+dateLimiteHackathon = new Date(dateLimiteHackathon);
+
+console.log("Now : ", dateNow)
+console.log("Limite : ", dateLimiteHackathon)
+
+
+if (dateNow > dateLimiteHackathon || nbPlaces == 0) {
+    btn.setAttribute('href', '#');
 }
-
-function nbPlaces(event)
-{
-    if(nbPlace=0)
-    {
-        btn.disabled=true;
-    }
-    else
-    {
-        btn.disabled=false;
-    }
-
-}
-
-btn.addEventListener("DOMContentLoaded", date());
-btn.addEventListener("DOMContentLoaded",nbPlaces());
