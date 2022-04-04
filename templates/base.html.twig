@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}Hackat'Web
 			{% endblock %}
 		</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -11,13 +11,12 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																																																																																																																														           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																																																																																																																																								           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			{#{{ encore_entry_link_tags('app') }}#}
 		{% endblock %}
-
-
 	</head>
+
 	<body>
 		<center>
 			<div class="container-fluid" style="background-color: #CC4B2C;">
@@ -25,10 +24,10 @@
 					<div class="collapse navbar-collapse" id="navbarCollapse">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item">
-								<a class="nav-link" href="/">Accueil</a>
+								<a class="nav-link" href="{{path('home')}}">Accueil</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/liste">Liste des hackathons</a>
+								<a class="nav-link" href="{{path('liste')}}">Liste des hackathons</a>
 							</li>
 						</ul>
 						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
