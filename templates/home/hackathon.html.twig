@@ -5,9 +5,6 @@
 	<script type="text/javascript" src="{{asset("js/index.js")}}"></script>
 {% endblock %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
-
 {% block body %}
 	<div class="container" style="margin-top: 100px; width:100%;">
 		<div class="card" style="width: 18rem; margin-bottom:20px;">
@@ -39,7 +36,7 @@
 					<a class="btn btn-success" href="{{path('inscription', {'id':unHackathon.idHackathon})}}" id="inscription">S'inscrire</a>
 				{% else %}
 					<a>S'inscrire :</a>
-					<a class="btn btn-success" href="/login">Se connecter</a>
+					<a class="btn btn-success" href="{{path('login')}}">Se connecter</a>
 				{% endif %}
 
 			</div>
