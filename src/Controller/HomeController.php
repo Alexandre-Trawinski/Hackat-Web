@@ -54,13 +54,13 @@ class HomeController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Inscriptionhackathon::class);
         $unHackathon = $repository->find($id);
         $lesInscriptions = $repo->findBy(['idhackathon' => $id]);
-
+        $img64 = $unHackathon->getImage();
         $nbInscriptions = count($lesInscriptions);
         return $this->render('home/hackathon.html.twig', [
-            'unHackathon' => $unHackathon, 'nbInscriptions' => $nbInscriptions
+             'unHackathon' => $unHackathon, 'nbInscriptions' => $nbInscriptions, 'img' => $img64
         ]);
     }
-
+    
     /**
      * @Route("/liste/{ville}", name="ListeHackathonsByVille")
      */

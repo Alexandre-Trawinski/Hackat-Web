@@ -102,7 +102,7 @@ class Hackathon
     /**
      * @var string|null
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image", type="string", length=4294967295, nullable=true)
      */
     private $image;
 
