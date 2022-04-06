@@ -38,7 +38,7 @@ class Inscriptionhackathon
     /**
      * @var Participant
      *
-     * @ORM\ManyToOne(targetEntity="Participant", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Participant")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idParticipant", referencedColumnName="idParticipant")
      * })
@@ -48,7 +48,7 @@ class Inscriptionhackathon
     /**
      * @var Hackathon
      *
-     * @ORM\ManyToOne(targetEntity="Hackathon", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Hackathon")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idHackathon", referencedColumnName="idHackathon")
      * })

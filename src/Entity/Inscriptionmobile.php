@@ -35,6 +35,7 @@ class Inscriptionmobile
      *   @ORM\JoinColumn(name="idEvenement", referencedColumnName="id")
      * })
      */
+
     private $idevenement;
 
     /**

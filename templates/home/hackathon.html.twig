@@ -2,13 +2,14 @@
 
 
 {% block javascripts %}
+	<script type="text/javascript" src="{{asset("js/favourite.js")}}"></script>
 	<script type="text/javascript" src="{{asset("js/index.js")}}"></script>
 {% endblock %}
 
 {% block body %}
 	<div class="container" style="margin-top: 100px; width:100%;">
 		<div class="card" style="width: 18rem; margin-bottom:20px;">
-			<img class="card-img-top" src= "data:image/png;base64,{{img}}">
+			<img class="card-img-top" src="data:image/png;base64,{{img}}">
 			<div class="card-body">
 				<h3 class="card-title">{{unHackathon.theme}}</h3>
 				<p>Début de l'événement :
@@ -33,9 +34,16 @@
 					places restantes
 				</p>
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-					<a class="btn btn-success" href="{{path('inscription', {'id':unHackathon.idHackathon})}}" id="inscription">S'inscrire</a>
+					<form onsubmit="return(confirm('Quel est votre competence ?'))" action="{{path('inscription', {'id':unHackathon.idHackathon})}}" id="inscription" method="POST">
+						<input type="submit" class="btn btn-primary" value="S'inscrire">
+					</form>
+
+					<a href="" class="js-a-favourite">
+						<i class="fa-regular fa-star"></i>
+						<span>Ajouter aux Favoris</span>
+					</a>
+
 				{% else %}
-					<a>S'inscrire :</a>
 					<a class="btn btn-success" href="{{path('login')}}">Se connecter</a>
 				{% endif %}
 

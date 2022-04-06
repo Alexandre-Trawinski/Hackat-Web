@@ -71,9 +71,16 @@ class Evenement
     private $intervenant;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="emailIntervenant", type="text", length=65535, nullable=true)
+     */
+    private $emailintervenant;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=500, nullable=false)
+     * @ORM\Column(name="image", type="string", length=4294967295, nullable=false)
      */
     private $image;
 
@@ -183,12 +190,24 @@ class Evenement
         return $this;
     }
 
+    public function getEmailintervenant(): ?string
+    {
+        return $this->emailintervenant;
+    }
+
+    public function setEmailintervenant(?string $emailintervenant): self
+    {
+        $this->emailintervenant = $emailintervenant;
+
+        return $this;
+    }
+
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image): self
     {
         $this->image = $image;
 

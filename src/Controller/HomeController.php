@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\HackathonRepository;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 use function PHPUnit\Framework\isNull;
@@ -38,7 +39,7 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $lesHackathons = $repository->trierParDate();
         $lesVilles = $repository->getVilleHackathon();
-        
+
         return $this->render('home/liste.html.twig', [
             'listeHackathons' => $lesHackathons, 'listeVilles' => $lesVilles
         ]);
@@ -57,10 +58,10 @@ class HomeController extends AbstractController
         $img64 = $unHackathon->getImage();
         $nbInscriptions = count($lesInscriptions);
         return $this->render('home/hackathon.html.twig', [
-             'unHackathon' => $unHackathon, 'nbInscriptions' => $nbInscriptions, 'img' => $img64
+            'unHackathon' => $unHackathon, 'nbInscriptions' => $nbInscriptions, 'img' => $img64
         ]);
     }
-    
+
     /**
      * @Route("/liste/{ville}", name="ListeHackathonsByVille")
      */
@@ -83,24 +84,6 @@ class HomeController extends AbstractController
         return $this->render('home/login.html.twig', ['lastUsername' => $lastUsername, 'errors' =>
         $errors]);
         return $this->render('base.html.twig', ['lastUsername' => $lastUsername]);
-    }
-
-    /**
-     *  @Route("/login/{email};{password}" , name="loginPassword")
-     */
-
-    public function Connexion($email, $password): Response
-    {
-        $algo = 'sha512';
-        hash($algo, $password);
-        $repository = $this->getDoctrine()->getRepository(Participant::class);
-        $leParticipant = $repository->findOneBy(['mail' => $email, 'password' => $password]);
-        if (isNull($leParticipant) == true) {
-            echo ("Ce login ne correspond à aucun utilisateur ou votre mot de passe est incorrect");
-            return $this->redirectToRoute('login');
-        }
-        return $this->redirectToRoute('home');
-        return $this->render('base.html.twig', ['login' => $email]);
     }
 
     /**
@@ -153,5 +136,25 @@ class HomeController extends AbstractController
         $em->persist($uneInscription);
         $em->flush();
         return $this->render('home/index.html.twig');
+    }
+
+    /**
+     * @Route("/favoris", name="unHackathonFavoris", methods="GET")
+     */
+    public function unHackathonFavoris($idHackathon): Response
+    {
+
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $tabJSON = [];
+        $leHackathon = $repository->find($idHackathon);
+
+        $lesFavoris = $leHackathon->getIdhackathon();
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($lesFavoris);
+        $em->flush();
+
+        $tabJSON = ['favoris' => $lesFavoris->getIdhackathon()];
+        return new JsonResponse($tabJSON);
     }
 }
