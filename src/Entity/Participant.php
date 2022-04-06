@@ -193,7 +193,6 @@ class Participant implements UserInterface
         return $this;
     }
 
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -217,22 +216,30 @@ class Participant implements UserInterface
 
         return $this;
     }
-    public function getRoles() { return ['ROLE_USER']; }
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
 
     public function setRoles(array $roles): self
     {
-    $this->roles = $roles;
-    return $this;
+        $this->roles = $roles;
+        return $this;
     }
-    public function eraseCredentials() {}
-    public function getSalt() {return null;}
+    public function eraseCredentials()
+    {
+    }
+    public function getSalt()
+    {
+        return null;
+    }
 
     /**
-    * A visual identifier that represents this user.
-    * @see UserInterface
-    */
+     * A visual identifier that represents this user.
+     * @see UserInterface
+     */
     public function getUsername(): string
     {
-    return (string) $this->mail;
+        return (string) $this->mail;
     }
 }

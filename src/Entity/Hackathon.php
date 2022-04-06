@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="hackathon")
  * @ORM\Entity(repositoryClass=App\Repository\HackathonRepository::class)
-
  */
 class Hackathon
 {
@@ -102,7 +101,7 @@ class Hackathon
     /**
      * @var string|null
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image", type="string", length=4294967295, nullable=true)
      */
     private $image;
 
@@ -248,7 +247,7 @@ class Hackathon
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage($image): self
     {
         $this->image = $image;
 

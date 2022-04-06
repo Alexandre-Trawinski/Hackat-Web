@@ -34,7 +34,6 @@ class ApiController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $lesHackathons = $repository->findAll();
-        dump($lesHackathons);
         $TabJSON = [];
         foreach ($lesHackathons as $unHackathon) {
             $TabJSON[] =
@@ -52,8 +51,8 @@ class ApiController extends AbstractController
                     'dateLimite' =>  $unHackathon->getDatelimite(),
                     'nbPlaces' =>  $unHackathon->getNbplaces(),
                     'image' =>  $unHackathon->getImage(),
-
                 ];
+            dump($unHackathon->getImage());
         }
 
         return new JsonResponse($TabJSON);

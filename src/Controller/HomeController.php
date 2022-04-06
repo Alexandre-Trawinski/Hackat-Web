@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\HackathonRepository;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 use function PHPUnit\Framework\isNull;
@@ -75,14 +76,14 @@ class HomeController extends AbstractController
      */
     public function Login(AuthenticationUtils $authenticationUtils): Response
     {
-        $lastUsername=$authenticationUtils->getLastUsername();
-        $errors=$authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+        $errors = $authenticationUtils->getLastAuthenticationError();
         dump($authenticationUtils);
-        return $this->render('home/login.html.twig', ['lastUsername'=>$lastUsername, 'errors'=>
+        return $this->render('home/login.html.twig', ['lastUsername' => $lastUsername, 'errors' =>
         $errors]);
-        return $this->render('base.html.twig', ['lastUsername'=>$lastUsername]);
+        return $this->render('base.html.twig', ['lastUsername' => $lastUsername]);
     }
-    
+
     /**
      *  @Route("/login/{email};{password}" , name="loginPassword")
      */
@@ -92,15 +93,14 @@ class HomeController extends AbstractController
         $algo = 'sha512';
         hash($algo, $password);
         $repository = $this->getDoctrine()->getRepository(Participant::class);
-        $leParticipant = $repository->findOneBy(['mail'=>$email, 'password'=>$password]);
-        if(isNull($leParticipant)==true)
-        {
-            echo("Ce login ne correspond a aucun utilisateur ou votre mot de passe est incorrect");
+        $leParticipant = $repository->findOneBy(['mail' => $email, 'password' => $password]);
+        if (isNull($leParticipant) == true) {
+            echo ("Ce login ne correspond a aucun utilisateur ou votre mot de passe est incorrect");
             return $this->redirectToRoute('login');
         }
-        
+
         return $this->redirectToRoute('home');
-        return $this->render('base.html.twig',['login'=>$email]);
+        return $this->render('base.html.twig', ['login' => $email]);
     }
 
     /**
@@ -116,7 +116,7 @@ class HomeController extends AbstractController
      */
     public function addCompte(Request $request): Response
     {
-        $unParticipant=new Participant();
+        $unParticipant = new Participant();
         $form = $this->createForm(CompteType::class, $unParticipant);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -140,18 +140,38 @@ class HomeController extends AbstractController
         $unHackathon = $repo->findOneBy(['idhackathon' => $id]);
         //$leHackathon = new Hackathon($unHackathon);
         $date = date('Y-m-d');
-        $laDate= new DateTime($date);
-        $unParticipant = $this->getUser(); 
+        $laDate = new DateTime($date);
+        $unParticipant = $this->getUser();
         $competence = "dev full stack";
         $uneInscription = new Inscriptionhackathon();
         $uneInscription->setIdhackathon($unHackathon);
         $uneInscription->setIdparticipant($unParticipant);
         $uneInscription->setDateinscription($laDate);
         $uneInscription->setCompetence($competence);
-        
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($uneInscription);
         $em->flush();
-        return $this->render('home/index.html.twig');   
+        return $this->render('home/index.html.twig');
+    }
+
+    /**
+     * @Route("/favoris", name="unHackathonFavoris", methods="GET")
+     */
+    public function unHackathonFavoris($idHackathon): Response
+    {
+
+        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
+        $tabJSON = [];
+        $leHackathon = $repository->find($idHackathon);
+
+        $lesFavoris = $leHackathon->getIdhackathon();
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($lesFavoris);
+        $em->flush();
+
+        $tabJSON = ['favoris' => $lesFavoris->getIdhackathon()];
+        return new JsonResponse($tabJSON);
     }
 }
