@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
-
 {% block body %}
 
 	<div class="container">
@@ -12,7 +9,7 @@
 				{% for uneVille in listeVilles %}
 					<a href="{{path('ListeHackathonsByVille', {'ville':uneVille.ville})}}" class="btn btn-primary" style="margin-right:5px">{{uneVille.ville}}</a>
 				{% endfor %}
-				<a href="/liste" class="btn btn-primary" style="margin-right:5px">Toutes les villes</a>
+				<a href="{{path('liste')}}" class="btn btn-primary" style="margin-right:5px">Toutes les villes</a>
 			</div>
 		</div>
 	</div>
@@ -28,8 +25,11 @@
 							{{lesHackathons.ville}},
 							{{lesHackathons.codePostal}}
 						</h6>
-						<p>Date du début de l'évènement :
+						<p>Début de l'événement :
 							{{lesHackathons.dateDebut |date('d/m/Y')}}
+						</p>
+						<p id="dateLimite" data-datelimite='{{lesHackathons.dateLimite|date('Y-m-d')}}'>Inscription avant le  :
+							{{lesHackathons.dateLimite|date('d/m/Y H:i')}}
 						</p>
 						<a class="btn btn-primary" href="{{path('hackathon', {'id':lesHackathons.idHackathon})}}">En savoir plus</a>
 					</div>

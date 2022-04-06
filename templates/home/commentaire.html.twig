@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Hello HomeController!
+{% endblock %}
+
 {% block body %}
 
 	<section class="vh-100">
@@ -11,28 +14,28 @@
 							<div class="col-md-6 col-lg-7 d-flex align-items-center">
 								<div class="card-body p-4 p-lg-5 text-black">
 
-									<form action="{{ path('login') }}" method="post" style="color:white;">
+									<form action="" method="post" style="color:white;">
 
 										<div class="align-items-center mb-3 pb-1">
-											<p class="h1 fw-bold">Hackat Web</p>
+											<p class="h1 fw-bold">Commentaires</p>
 										</div>
 
-										<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez vous</h5>
+										<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Laisser un commentaire</h5>
 
 										<div class="form-outline mb-4">
 											<input type="email" id="form2Example17" name="_username" class="form-control form-control-lg" style="margin-bottom:10px;"/>
-											<label class="form-label" for="form2Example17">Adresse Email</label>
+											<label class="form-label" for="form2Example17">Titre</label>
 										</div>
 
 										<div class="form-outline mb-4">
-											<input type="password" id="form2Example27" name="_password" class="form-control form-control-lg" style="margin-bottom:10px;"/>
-											<label class="form-label" for="form2Example27">Mot de Passe</label>
+											<input  id="form2Example27"  class="form-control form-control-lg" style="margin-bottom:10px;"/>
+											<label class="form-label" for="form2Example27">Contenu</label>
 										</div>
 
 										<div class="pt-1 mb-4">
-											<button class="btn btn-dark btn-lg btn-block" type="submit">Se connecter</button>
+											<button class="btn btn-dark btn-lg btn-block" type="submit">Publier</button>
 										</div>
-										<a href="{{path('addCompte')}}" style="color: white;">Pas de compte ? S'inscrire ici</a>
+										<a href="voirCommentaires" style="color: white;">Voir les commentaires</a>
 									</form>
 
 								</div>

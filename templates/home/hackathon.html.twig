@@ -6,37 +6,31 @@
 	<script type="text/javascript" src="{{asset("js/index.js")}}"></script>
 {% endblock %}
 
-{% block stylesheets %}
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
-{% endblock %}
-
-{% block title %}Hello HomeController!
-{% endblock %}
-
 {% block body %}
 	<div class="container" style="margin-top: 100px; width:100%;">
 		<div class="card" style="width: 18rem; margin-bottom:20px;">
-			<img class="card-img-top" src="data:image/png;base64,{{unHackathon.image}}">
+			<img class="card-img-top" src="data:image/png;base64,{{img}}">
 			<div class="card-body">
 				<h3 class="card-title">{{unHackathon.theme}}</h3>
-				<p>Date du début de l'évènement :
+				<p>Début de l'événement :
 					{{unHackathon.dateDebut |date('d/m/Y')}}
+					{{unHackathon.heureDebut|date('H:i')}}
 				</p>
-				<p>Date de fin de l'évènement :
+				<p>Fin de l'événement :
 					{{unHackathon.dateFin|date('d/m/Y')}}
+					{{unHackathon.heureFin|date('H:i')}}
 				</p>
-				<p>Heure d'ouverture de l'évènement :
-					{{unHackathon.heureDebut|date('h:i')}}
-				</p>
-				<p>Date limite d'inscription :
-					{{unHackathon.dateLimite|date('d/m/Y')}}
+
+				<p id="dateLimite" data-datelimite='{{unHackathon.dateLimite|date('Y-m-d')}}'>Date limite d'inscription :
+					{{unHackathon.dateLimite|date('d/m/Y H:i')}}
 				</p>
 				<p>{{unHackathon.lieu}},
 					{{unHackathon.rue}},
 					{{unHackathon.ville}},
 					{{unHackathon.codePostal}}
 				</p>
-				<p id="nbPlaces">{{unHackathon.nbPlaces}}
+				<p id="nbPlaces" data-nbplaces='{{unHackathon.nbPlaces}}'>
+					{{unHackathon.nbPlaces}}
 					places restantes
 				</p>
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -50,8 +44,7 @@
 					</a>
 
 				{% else %}
-
-					<a class="btn btn-success" href="/login">Se connecter</a>
+					<a class="btn btn-success" href="{{path('login')}}">Se connecter</a>
 				{% endif %}
 
 			</div>
