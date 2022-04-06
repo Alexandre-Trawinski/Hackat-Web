@@ -80,7 +80,7 @@ class Evenement
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=200, nullable=false)
+     * @ORM\Column(name="type", type="string", length=4294967295, nullable=false)
      */
     private $type;
 
