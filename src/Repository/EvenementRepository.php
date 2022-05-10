@@ -18,7 +18,6 @@ class EvenementRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Evenement::class);
     }
-
     // /**
     //  * @return Evenement[] Returns an array of Evenement objects
     //  */

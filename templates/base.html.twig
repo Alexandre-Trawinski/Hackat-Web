@@ -35,9 +35,8 @@
 							</li>
 						</ul>
 						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-							<a style="margin-right:5%" class="btn btn-success" href="{{path('unHackathonFavoris')}}">Mon Tableau de Bord</a>
-							<a style="color:white; margin-right:5%;">{{ app.user.nom }}
-								{{app.user.prenom}}</a>
+							<a style="margin-right:5%" class="btn btn-success" href="{{path('favoris',{'idparticipant':app.user.idParticipant})}}">Mon Tableau de Bord</a>
+							<a style="color:white; margin-right:5%;">{{app.user.prenom}} {{ app.user.nom }}</a>
 							<a class="btn btn-danger" href="{{path('logout')}}">Se déconnecter</a>
 						{% else %}
 							<a class="btn btn" href="{{path('login')}}" style="background-color: #2ABA2D; color:white;">Se connecter</a>

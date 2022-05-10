@@ -16,26 +16,21 @@
 
 	<div class="row" style="margin-top: 100px;">
 		{% for lesHackathons in listeHackathons %}
-			<div class="col col-lg-3 col-md-4 col-sm12" style="margin-top: 50px; margin-bottom:50px;">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top" src="data:image/png;base64,{{lesHackathons.image}}">
-					<div class="card-body">
-						<h4 class="card-title">{{lesHackathons.theme}}</h4>
-						<h6>{{lesHackathons.lieu}},
-							{{lesHackathons.ville}},
-							{{lesHackathons.codePostal}}
-						</h6>
-						<p>Début de l'événement :
-							{{lesHackathons.dateDebut |date('d/m/Y')}}
-						</p>
-						<p id="dateLimite" data-datelimite='{{lesHackathons.dateLimite|date('Y-m-d')}}'>Inscription avant le  :
-							{{lesHackathons.dateLimite|date('d/m/Y H:i')}}
-						</p>
-						<a class="btn btn-primary" href="{{path('hackathon', {'id':lesHackathons.idHackathon})}}">En savoir plus</a>
+			{% if lesHackathons.dateLimite >= dateNow  %}
+				<div class="col col-lg-3 col-md-4 col-sm12" style="margin-top: 50px; margin-bottom:50px;">
+					<div class="card" style="width: 20rem;">
+						<img class="card-img-top" src="data:image/png;base64,{{lesHackathons.image}}">
+						<div class="card-body">
+							<h4 class="card-title">{{lesHackathons.theme}}</h4>
+							<h6>{{lesHackathons.lieu}}, {{lesHackathons.ville}}, {{lesHackathons.codePostal}} </h6>
+							<p>Début de l'événement : {{lesHackathons.dateDebut |date('d/m/Y')}} </p>
+							<p id="dateLimite" data-datelimite='{{lesHackathons.dateLimite|date('Y-m-d')}}'>Inscription avant le  :
+								{{lesHackathons.dateLimite|date('d/m/Y H:i')}}</p>
+							<a class="btn btn-primary" href="{{path('hackathon', {'id':lesHackathons.idHackathon})}}">En savoir plus</a>
+						</div>
 					</div>
 				</div>
-			</div>
+			{% endif %}
 		{% endfor %}
 	</div>
-
 {% endblock %}

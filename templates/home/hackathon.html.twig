@@ -3,12 +3,11 @@
 
 {% block javascripts %}
 	<script type="text/javascript" src="{{asset("js/favourite.js")}}"></script>
-	<script type="text/javascript" src="{{asset("js/index.js")}}"></script>
 {% endblock %}
 
 {% block body %}
 	<div class="container" style="margin-top: 100px; width:100%;">
-		<div class="card" style="width: 18rem; margin-bottom:20px;">
+		<div class="card" style="width: 22rem; margin-bottom:20px;">
 			<img class="card-img-top" src="data:image/png;base64,{{img}}">
 			<div class="card-body">
 				<h3 class="card-title">{{unHackathon.theme}}</h3>
@@ -26,22 +25,19 @@
 				</p>
 				<p>{{unHackathon.lieu}},
 					{{unHackathon.rue}},
-					{{unHackathon.ville}},
-					{{unHackathon.codePostal}}
+					{{unHackathon.codePostal}},
+					{{unHackathon.ville}}
 				</p>
 				<p id="nbPlaces" data-nbplaces='{{unHackathon.nbPlaces}}'>
 					{{unHackathon.nbPlaces}}
 					places restantes
 				</p>
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-					<form onsubmit="return(confirm('Quel est votre competence ?'))" action="{{path('inscription', {'id':unHackathon.idHackathon})}}" id="inscription" method="POST">
+					<form onsubmit="return(confirm('Êtes-vous sûr de vouloir vous inscrire ?'))" action="{{path('inscription', {'id':unHackathon.idHackathon})}}" id="inscription" method="POST">
 						<input type="submit" class="btn btn-primary" value="S'inscrire">
 					</form>
-
-					<a href="" class="js-a-favourite">
-						<i class="fa-regular fa-star"></i>
-						<span>Ajouter aux Favoris</span>
-					</a>
+					<br>
+					<a href="{{path('addFavoris',{'idhackathon':unHackathon.idHackathon})}}"><i class="fa-regular fa-star"></i>Ajouter aux Favoris</a>
 
 				{% else %}
 					<a class="btn btn-success" href="{{path('login')}}">Se connecter</a>

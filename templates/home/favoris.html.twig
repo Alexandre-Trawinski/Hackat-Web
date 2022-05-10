@@ -1,6 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %}Tableau de bord
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+
+<div class="card" style="width: 30rem; margin-top:5rem;">
+	<div class="card-header">
+		<div class="card-body">
+			<h3 class="card-title">Mes informations personnelles</h3><br>
+			<p class="card-text">
+				{{app.user.prenom}} {{app.user.nom}}<br><br>
+				{{app.user.dateNaissance|date("d/m/Y")}} <br><br>
+				{{app.user.rue}}, {{app.user.ville}}, {{app.user.codePostal}} </br><br>
+				{{app.user.mail}} </br><br>
+				{{app.user.tel}} </br><br>
+				{{app.user.portfolio}} </br><br>
+			</p>
+		</div>
+  	</div>
+</div>
+
+	<div class="card" style="width: 45rem; margin-top:5rem;">
+		<div class="card-header"><b>Mes favoris</b></div>
+		<div class="card-body">
+				<p>	<div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top :2%">
+
+		{% for unFavori in lesFavoris %}
+
+			<div class="col">
+
+				<div class="card" style="width: 35rem; margin-bottom:2rem;">
+					<img src="data:image/png;base64,{{unFavori.idHackathon.image}}" class="card-img-top">
+					<div class="card-body">
+						<h3 class="card-title">{{unFavori.idHackathon.theme}}</h3>
+						<h4 class="card-text">{{unFavori.idHackathon.lieu}}, {{unFavori.idHackathon.rue}}</h4>
+						<h4 class="card-text">{{unFavori.idHackathon.codePostal}}, {{unFavori.idHackathon.ville}}</h4>
+							<form action="{{path('deleteFavoris', {'idparticipant':app.user.idparticipant, 'idfavoris':unFavori.idfavoris})}}" method="POST" onSubmit="return(confirm('Voulez-vous vraiment supprimer ce favori ?'))">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="submit" class="btn btn-outline-danger" value="Supprimer">
+							</form>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div></p>
+		</div>
+	</div>
+
+
+{% endblock %}

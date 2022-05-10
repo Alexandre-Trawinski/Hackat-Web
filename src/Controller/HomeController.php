@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Favoris;
 use App\Entity\Hackathon;
 use App\Form\CompteType;
 use App\Entity\Participant;
@@ -39,14 +40,15 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $lesHackathons = $repository->trierParDate();
         $lesVilles = $repository->getVilleHackathon();
+        $dateNow = new DateTime('now');
 
         return $this->render('home/liste.html.twig', [
-            'listeHackathons' => $lesHackathons, 'listeVilles' => $lesVilles
+            'listeHackathons' => $lesHackathons, 'listeVilles' => $lesVilles, 'dateNow' => $dateNow
         ]);
     }
 
     /**
-     * @Route("/liste/{id}", name="hackathon", requirements={"id"="\d+"})
+     * @Route("/liste/details/{id}", name="hackathon", requirements={"id"="\d+"})
      */
 
     public function afficherDetails($id): Response
@@ -94,24 +96,6 @@ class HomeController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    /**
-     * @Route("/addCompte", name="addCompte")
-     */
-    public function addCompte(Request $request): Response
-    {
-        $unParticipant = new Participant();
-        $form = $this->createForm(CompteType::class, $unParticipant);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($unParticipant);
-            $em->flush();
-            return $this->redirectToRoute('login');
-        }
-        return $this->render('addCompte/index.html.twig', [
-            'monForm' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/liste/{id}/inscription", name="inscription")
@@ -125,7 +109,7 @@ class HomeController extends AbstractController
         $date = date('Y-m-d');
         $laDate = new DateTime($date);
         $unParticipant = $this->getUser();
-        $competence = "dev full stack";
+        $competence = "full stack";
         $uneInscription = new Inscriptionhackathon();
         $uneInscription->setIdhackathon($unHackathon);
         $uneInscription->setIdparticipant($unParticipant);
@@ -136,25 +120,5 @@ class HomeController extends AbstractController
         $em->persist($uneInscription);
         $em->flush();
         return $this->render('home/index.html.twig');
-    }
-
-    /**
-     * @Route("/favoris", name="unHackathonFavoris", methods="GET")
-     */
-    public function unHackathonFavoris($idHackathon): Response
-    {
-
-        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $tabJSON = [];
-        $leHackathon = $repository->find($idHackathon);
-
-        $lesFavoris = $leHackathon->getIdhackathon();
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($lesFavoris);
-        $em->flush();
-
-        $tabJSON = ['favoris' => $lesFavoris->getIdhackathon()];
-        return new JsonResponse($tabJSON);
     }
 }

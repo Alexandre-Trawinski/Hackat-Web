@@ -16,16 +16,19 @@ class AddCompteController extends AbstractController
      */
     public function addCompte(Request $request): Response
     {
+        $em = $this->getDoctrine()->getManager();
         $unParticipant=new Participant();
         $form = $this->createForm(CompteType::class, $unParticipant);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $unParticipant->setPassword( 
+                password_hash($unParticipant->getPassword(),PASSWORD_BCRYPT)
+            );
             $em->persist($unParticipant);
             $em->flush();
             return $this->redirectToRoute('login');
         }
-        return $this->render('home/login.html.twig', [
+        return $this->render('addCompte/index.html.twig', [
             'monForm' => $form->createView(),
         ]);
     }

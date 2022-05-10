@@ -3,15 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\ParticipantRepository;
+
 
 /**
  * Participant
  *
  * @ORM\Table(name="participant", uniqueConstraints={@ORM\UniqueConstraint(name="mail", columns={"mail"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=App\Repository\ParticipantRepository::class)
  */
-class Participant implements UserInterface
+class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @var int
@@ -91,6 +94,11 @@ class Participant implements UserInterface
      * @ORM\Column(name="portfolio", type="string", length=500, nullable=false)
      */
     private $portfolio;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     public function getIdparticipant(): ?int
     {
@@ -198,7 +206,7 @@ class Participant implements UserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -216,9 +224,12 @@ class Participant implements UserInterface
 
         return $this;
     }
-    public function getRoles()
-    {
-        return ['ROLE_USER'];
+
+    public function getRoles(): array {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER 
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles); 
     }
 
     public function setRoles(array $roles): self
@@ -228,6 +239,8 @@ class Participant implements UserInterface
     }
     public function eraseCredentials()
     {
+        // If you store any temporary, sensitive data on the user, clear it he
+        // $this->plainPassword = null; 
     }
     public function getSalt()
     {
@@ -240,6 +253,15 @@ class Participant implements UserInterface
      */
     public function getUsername(): string
     {
+        return (string) $this->mail;
+    }
+
+    /** 
+     * A visual identifier that represents this user. 
+     * @see UserInterface 
+     */ 
+    public function getUserIdentifier(): string 
+    { 
         return (string) $this->mail;
     }
 }
