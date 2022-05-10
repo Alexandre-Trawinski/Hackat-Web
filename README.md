@@ -30,7 +30,7 @@ symfony serve
 ```
 
 
-### Règes pour les commits :
+### Référentiel pour les commits :
 
 - feat(): -> nouvelle fonction
 - fix(): -> correction code
