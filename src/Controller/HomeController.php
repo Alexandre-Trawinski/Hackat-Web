@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Favoris;
 use App\Entity\Hackathon;
 use App\Form\CompteType;
 use App\Entity\Participant;
@@ -138,23 +139,39 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig');
     }
 
-    /**
-     * @Route("/favoris", name="unHackathonFavoris", methods="GET")
+     /**
+     * @Route("/liste/{id}/favoris", name="hackathonFavoris")
      */
-    public function unHackathonFavoris($idHackathon): Response
+
+    public function favoris($id): Response
     {
-
-        $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $tabJSON = [];
-        $leHackathon = $repository->find($idHackathon);
-
-        $lesFavoris = $leHackathon->getIdhackathon();
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($lesFavoris);
+        $repository = $this->getDoctrine()->getRepository(Favoris::class);
+        $leFavoris = $repository->findOneBy(['idhackathon' => $id, 'idparticipant' => $this->getUser()]);
+        if (is_null($leFavoris) == true) {
+            $favoris = new Favoris;
+            $favoris->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
+            $favoris->setIdparticipant($this->getUser());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($favoris);
+        }
+        else{
+            $repository = $this->getDoctrine()->getRepository(Favoris::class);
+            $leFavoris = $repository->findOneBy(['idHackathon' => $id, 'idParticipant' => $this->getUser()]);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($leFavoris);
+        
+        }
         $em->flush();
+        return $this->redirectToRoute('listeHackathon');
+    }
 
-        $tabJSON = ['favoris' => $lesFavoris->getIdhackathon()];
-        return new JsonResponse($tabJSON);
+    /**
+     *  @Route("/lesFavoris", name="favoris")
+     */
+    public function getFavoris($user): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Favoris::class);
+        $lesFavoris = $repository->findBy(['idParticipant'=>$user]);
+        return $this->render('home/favoris.html.twig',[]);
     }
 }
