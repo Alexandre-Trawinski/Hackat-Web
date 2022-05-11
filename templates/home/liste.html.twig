@@ -6,7 +6,7 @@
 		<div class="row" style="margin-top: 100px; width:100%">
 			<div style="width:100%">
 				<h1>Liste des Villes</h1>
-				{% for uneVille in listeVilles %}
+				{% for uneVille in listeVilles %}	
 					<a href="{{path('ListeHackathonsByVille', {'ville':uneVille.ville})}}" class="btn btn-primary" style="margin-right:5px">{{uneVille.ville}}</a>
 				{% endfor %}
 				<a href="{{path('liste')}}" class="btn btn-primary" style="margin-right:5px">Toutes les villes</a>
@@ -16,7 +16,7 @@
 
 	<div class="row" style="margin-top: 100px;">
 		{% for lesHackathons in listeHackathons %}
-			{% if lesHackathons.dateLimite >= dateNow  %}
+			{% if (lesHackathons.dateLimite >= dateNow) and (lesHackathons.nbPlaces > 0) %}
 				<div class="col col-lg-3 col-md-4 col-sm12" style="margin-top: 50px; margin-bottom:50px;">
 					<div class="card" style="width: 20rem;">
 						<img class="card-img-top" src="data:image/png;base64,{{lesHackathons.image}}">

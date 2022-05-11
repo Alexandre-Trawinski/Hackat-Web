@@ -2,31 +2,29 @@
 
 {% block body %}
 
-<link rel="stylesheet" src="{{ asset('hackathon.jpg')}}">
-<link rel="stylesheet" src="{{ asset('styles/accueil.css')}}">
 
-	<div>
-		<div class="jumbotron" style="background-color: #CC4B2C; margin-bottom:5rem;">
-			<center>
-				<br>
-				<h1 style="color:white">Bienvenue sur Hackat'Web</h1>
-			</center>
-		</div>
-
-		<div class="row justify-content-between" style="margin-right:10rem;">
-			<div class="col-4" style="margin-left:10rem;">
-				<div class="card" style="width:30rem">
-					<div class="card-body">
-						<h4 class="card-title">Liste des hackathons</h4>
-						<a href="{{path('liste')}}" class="btn btn-primary">Voir plus</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card" style="width: 120%;">
-					<img class="fit-picture" src="hackathon.jpg">
-				</div>
-			</div>
-  		</div>
+<div>
+	<div class="jumbotron" style="background-color: #CC4B2C; margin-bottom:5rem;">
+		<center>
+			<br>
+			<h1 style="color:white">Bienvenue sur Hackat'Web</h1>
+		</center>
 	</div>
+
+	<div class="row justify-content-between" style="margin-right:10rem;">
+		<div class="col-4" style="margin-left:10rem;">
+			<div class="card" style="width:30rem">
+				<div class="card-body">
+					<h4 class="card-title">Liste des hackathons</h4>
+					<a href="{{path('liste')}}" class="btn btn-primary">Voir plus</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card" style="width: 120%;">
+				<img class="fit-picture" src="{{ asset('hackathon.jpg')}}">
+			</div>
+		</div>
+  	</div>
+</div>
 {% endblock %}

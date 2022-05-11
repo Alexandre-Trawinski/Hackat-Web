@@ -28,8 +28,6 @@ class AddCompteController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('login');
         }
-        return $this->render('addCompte/index.html.twig', [
-            'monForm' => $form->createView(),
-        ]);
+        return $this->render('addCompte/index.html.twig', ['monForm' => $form->createView()]);
     }
 }

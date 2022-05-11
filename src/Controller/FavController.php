@@ -21,9 +21,7 @@ class FavController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Favoris::class);
         $lesFavs = $repository->findBy(array('idparticipant' => $idparticipant));
 
-        return $this->render('home/favoris.html.twig', [
-            'lesFavoris' => $lesFavs,
-        ]);
+        return $this->render('home/favoris.html.twig', ['lesFavoris' => $lesFavs]);
     }
 
 
@@ -33,7 +31,6 @@ class FavController extends AbstractController
     public function addFavoris($idhackathon)
     { 
         $entityManager = $this->getDoctrine()->getManager();
-
         $favoris = new Favoris();
         $repo = $this->getDoctrine()->getRepository(Hackathon::class);
         $unHackathon = $repo->find($idhackathon);
@@ -47,13 +44,7 @@ class FavController extends AbstractController
                 $entityManager->persist($unHackathon);
                 $entityManager->flush();  
             }
-            else{
-                
-            }
-
-        
          // persist de l'objet hackathon 
-        
         return $this->redirectToRoute('liste');
     }  
 

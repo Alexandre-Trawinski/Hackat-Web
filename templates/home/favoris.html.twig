@@ -21,32 +21,31 @@
   	</div>
 </div>
 
-	<div class="card" style="width: 45rem; margin-top:5rem;">
-		<div class="card-header"><b>Mes favoris</b></div>
+<div class="card" style="width: 45rem; margin-top:5rem;">
+	<div class="card-header"><b>Mes favoris</b></div>
 		<div class="card-body">
-				<p>	<div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top :2%">
+			<p>	<div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top :2%">
 
-		{% for unFavori in lesFavoris %}
+			{% for unFavori in lesFavoris %}
 
-			<div class="col">
-
-				<div class="card" style="width: 35rem; margin-bottom:2rem;">
-					<img src="data:image/png;base64,{{unFavori.idHackathon.image}}" class="card-img-top">
-					<div class="card-body">
-						<h3 class="card-title">{{unFavori.idHackathon.theme}}</h3>
-						<h4 class="card-text">{{unFavori.idHackathon.lieu}}, {{unFavori.idHackathon.rue}}</h4>
-						<h4 class="card-text">{{unFavori.idHackathon.codePostal}}, {{unFavori.idHackathon.ville}}</h4>
-							<form action="{{path('deleteFavoris', {'idparticipant':app.user.idparticipant, 'idfavoris':unFavori.idfavoris})}}" method="POST" onSubmit="return(confirm('Voulez-vous vraiment supprimer ce favori ?'))">
-								<input type="hidden" name="_method" value="DELETE">
-								<input type="submit" class="btn btn-outline-danger" value="Supprimer">
-							</form>
+				<div class="col">
+					<div class="card" style="width: 35rem; margin-bottom:2rem;">
+						<img src="data:image/png;base64,{{unFavori.idHackathon.image}}" class="card-img-top">
+						<div class="card-body">
+							<h3 class="card-title">{{unFavori.idHackathon.theme}}</h3>
+							<h4 class="card-text">{{unFavori.idHackathon.lieu}}, {{unFavori.idHackathon.rue}}</h4>
+							<h4 class="card-text">{{unFavori.idHackathon.codePostal}}, {{unFavori.idHackathon.ville}}</h4>
+								<form action="{{path('deleteFavoris', {'idparticipant':app.user.idparticipant, 'idfavoris':unFavori.idfavoris})}}" method="POST" onSubmit="return(confirm('Voulez-vous vraiment supprimer ce favori ?'))">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="submit" class="btn btn-outline-danger" value="Supprimer">
+								</form>
+						</div>
 					</div>
 				</div>
-			</div>
-		{% endfor %}
-	</div></p>
+			{% endfor %}
+			</p>
 		</div>
 	</div>
-
+</div>
 
 {% endblock %}

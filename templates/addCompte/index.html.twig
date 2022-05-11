@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+	<script type="text/javascript" src="{{asset("js/valideUrl.js")}}"></script>
+{% endblock %}
+
 {% block body %}
 	<div class="container" style="margin-top:5%; margin-bottom:5%;">
 
@@ -9,22 +13,22 @@
 			<b style="color:white;">Nom</b>
 			{{ form_widget(monForm.nom) }}
 			<br>
-			<b  style="color:white;">Prénom</b>
+			<b style="color:white;">Prénom</b>
 			{{ form_widget(monForm.prenom) }}
 			<br>
-			<b  style="color:white;">Date de naissance</b>
+			<b style="color:white;">Date de naissance</b>
 			{{ form_widget(monForm.datenaissance) }}
 			<br>
-			<b  style="color:white;">Rue</b>
+			<b style="color:white;">Rue</b>
 			{{ form_widget(monForm.rue) }}
 			<br>
-			<b  style="color:white;">Ville</b>
+			<b style="color:white;">Ville</b>
 			{{ form_widget(monForm.ville) }}
 			<br>
-			<b  style="color:white;">Code postal</b>
+			<b style="color:white;">Code postal</b>
 			{{ form_widget(monForm.codepostal) }}
 			<br>
-			<b style="color:white;"> Mail</b>
+			<b style="color:white;">Mail</b>
 			{{ form_widget(monForm.mail) }}
 			<br>
 			<b style="color:white;">Téléphone</b>
@@ -33,10 +37,11 @@
 			<b style="color:white;">Mot de passe</b>
 			{{ form_widget(monForm.password) }}
 			<br>
-			<b style="color:white;">Portfolio</b>
+			<b id="portfolio" style="color:white;">Portfolio</b>
 			{{ form_widget(monForm.portfolio) }}
 			<br>
-			<input type="submit" class="btn btn-dark btn-lg btn-block" style="margin-top:2%; margin-bottom:2%" value="Ajouter">
+			<span class="text-warning" id="erreur"></span>
+			<input type="submit" class="btn btn-dark btn-lg btn-block" style="margin-top:2%; margin-bottom:2%" value="Ajouter" id="ajouter">
 		</div>
 		{{form_end(monForm)}}
 	</div>

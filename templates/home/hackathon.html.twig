@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
 {% block javascripts %}
 	<script type="text/javascript" src="{{asset("js/favourite.js")}}"></script>
 {% endblock %}
@@ -11,34 +10,20 @@
 			<img class="card-img-top" src="data:image/png;base64,{{img}}">
 			<div class="card-body">
 				<h3 class="card-title">{{unHackathon.theme}}</h3>
-				<p>Début de l'événement :
-					{{unHackathon.dateDebut |date('d/m/Y')}}
-					{{unHackathon.heureDebut|date('H:i')}}
+				<p>Début de l'événement : {{unHackathon.dateDebut |date('d/m/Y')}} {{unHackathon.heureDebut|date('H:i')}}</p>
+				<p>Fin de l'événement : {{unHackathon.dateFin|date('d/m/Y')}} {{unHackathon.heureFin|date('H:i')}}</p>
+				<p id="dateLimite" data-datelimite='{{unHackathon.dateLimite|date('Y-m-d')}}'>
+					Date limite d'inscription : {{unHackathon.dateLimite|date('d/m/Y H:i')}}
 				</p>
-				<p>Fin de l'événement :
-					{{unHackathon.dateFin|date('d/m/Y')}}
-					{{unHackathon.heureFin|date('H:i')}}
-				</p>
+				<p>{{unHackathon.lieu}}, {{unHackathon.rue}}, {{unHackathon.codePostal}}, {{unHackathon.ville}}</p>
+				<p id="nbPlaces" data-nbplaces='{{unHackathon.nbPlaces}}'>{{unHackathon.nbPlaces}} places restantes</p>
 
-				<p id="dateLimite" data-datelimite='{{unHackathon.dateLimite|date('Y-m-d')}}'>Date limite d'inscription :
-					{{unHackathon.dateLimite|date('d/m/Y H:i')}}
-				</p>
-				<p>{{unHackathon.lieu}},
-					{{unHackathon.rue}},
-					{{unHackathon.codePostal}},
-					{{unHackathon.ville}}
-				</p>
-				<p id="nbPlaces" data-nbplaces='{{unHackathon.nbPlaces}}'>
-					{{unHackathon.nbPlaces}}
-					places restantes
-				</p>
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 					<form onsubmit="return(confirm('Êtes-vous sûr de vouloir vous inscrire ?'))" action="{{path('inscription', {'id':unHackathon.idHackathon})}}" id="inscription" method="POST">
 						<input type="submit" class="btn btn-primary" value="S'inscrire">
 					</form>
 					<br>
 					<a href="{{path('addFavoris',{'idhackathon':unHackathon.idHackathon})}}"><i class="fa-regular fa-star"></i>Ajouter aux Favoris</a>
-
 				{% else %}
 					<a class="btn btn-success" href="{{path('login')}}">Se connecter</a>
 				{% endif %}
