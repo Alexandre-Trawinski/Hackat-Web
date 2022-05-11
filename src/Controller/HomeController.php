@@ -2,22 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Favoris;
 use App\Entity\Hackathon;
-use App\Form\CompteType;
-use App\Entity\Participant;
-use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Inscriptionhackathon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\HackathonRepository;
 use DateTime;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
-use function PHPUnit\Framework\isNull;
 
 class HomeController extends AbstractController
 {
@@ -26,9 +17,7 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/index.html.twig', ['controller_name' => 'HomeController']);
     }
 
     /**
@@ -37,14 +26,11 @@ class HomeController extends AbstractController
 
     public function AccesListe(): Response
     {
+        $dateNow = new DateTime('now');
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $lesHackathons = $repository->trierParDate();
-        $lesVilles = $repository->getVilleHackathon();
-        $dateNow = new DateTime('now');
-
-        return $this->render('home/liste.html.twig', [
-            'listeHackathons' => $lesHackathons, 'listeVilles' => $lesVilles, 'dateNow' => $dateNow
-        ]);
+        $lesVilles = $repository->getVilleHackathon($dateNow);
+        return $this->render('home/liste.html.twig', ['listeHackathons' => $lesHackathons, 'listeVilles' => $lesVilles, 'dateNow' => $dateNow]);
     }
 
     /**
@@ -59,20 +45,19 @@ class HomeController extends AbstractController
         $lesInscriptions = $repo->findBy(['idhackathon' => $id]);
         $img64 = $unHackathon->getImage();
         $nbInscriptions = count($lesInscriptions);
-        return $this->render('home/hackathon.html.twig', [
-            'unHackathon' => $unHackathon, 'nbInscriptions' => $nbInscriptions, 'img' => $img64
-        ]);
+        return $this->render('home/hackathon.html.twig', ['unHackathon' => $unHackathon, 'nbInscriptions' => $nbInscriptions, 'img' => $img64]);
     }
 
     /**
-     * @Route("/liste/{ville}", name="ListeHackathonsByVille")
+     * @Route("/liste/ville/{ville}", name="ListeHackathonsByVille")
      */
     public function ListeHackathonsByVille($ville): Response
     {
+        $dateNow = new DateTime('now');
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
-        $listeVilles = $repository->getVilleHackathon();
+        $listeVilles = $repository->getVilleHackathon($dateNow);
         $listeHackathons = $repository->findBy(['ville' => $ville]);
-        return $this->render('home/liste.html.twig', ['listeHackathons' => $listeHackathons, 'listeVilles' => $listeVilles]);
+        return $this->render('home/liste.html.twig', ['listeHackathons' => $listeHackathons, 'listeVilles' => $listeVilles, 'dateNow'=>$dateNow]);
     }
 
     /**
@@ -82,9 +67,7 @@ class HomeController extends AbstractController
     {
         $lastUsername = $authenticationUtils->getLastUsername();
         $errors = $authenticationUtils->getLastAuthenticationError();
-        dump($authenticationUtils);
-        return $this->render('home/login.html.twig', ['lastUsername' => $lastUsername, 'errors' =>
-        $errors]);
+        return $this->render('home/login.html.twig', ['lastUsername' => $lastUsername, 'errors' => $errors]);
         return $this->render('base.html.twig', ['lastUsername' => $lastUsername]);
     }
 
@@ -105,11 +88,11 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Inscriptionhackathon::class);
         $repo = $this->getDoctrine()->getRepository(Hackathon::class);
         $unHackathon = $repo->findOneBy(['idhackathon' => $id]);
-        //$leHackathon = new Hackathon($unHackathon);
         $date = date('Y-m-d');
         $laDate = new DateTime($date);
         $unParticipant = $this->getUser();
         $competence = "full stack";
+
         $uneInscription = new Inscriptionhackathon();
         $uneInscription->setIdhackathon($unHackathon);
         $uneInscription->setIdparticipant($unParticipant);

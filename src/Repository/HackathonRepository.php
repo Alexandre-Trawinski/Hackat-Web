@@ -27,10 +27,12 @@ class HackathonRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getVilleHackathon()
+    public function getVilleHackathon($dateNow)
     {
         return $this->createQueryBuilder('v')
             ->select('v.ville')
+            ->setParameter('dateNow', $dateNow)
+            ->andWhere('v.datelimite > :dateNow')
             ->distinct()
             ->getQuery()
             ->getResult();

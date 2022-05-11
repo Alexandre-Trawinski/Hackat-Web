@@ -11,9 +11,6 @@ use App\Entity\Hackathon;
 use App\Entity\Participant;
 use App\Entity\Evenement;
 use App\Entity\Inscriptionmobile;
-use App\Repository\EvenementRepository;
-use App\Repository\HackathonRepository;
-use Symfony\Component\Serializer\Encoder\JsonDecode;
 
 class ApiController extends AbstractController
 {
@@ -22,9 +19,7 @@ class ApiController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('api/index.html.twig', [
-            'controller_name' => 'ApiController',
-        ]);
+        return $this->render('api/index.html.twig', ['controller_name' => 'ApiController']);
     }
 
     /**
@@ -52,9 +47,7 @@ class ApiController extends AbstractController
                     'nbPlaces' =>  $unHackathon->getNbplaces(),
                     'image' =>  $unHackathon->getImage(),
                 ];
-            dump($unHackathon->getImage());
         }
-
         return new JsonResponse($TabJSON);
     }
 
@@ -84,7 +77,6 @@ class ApiController extends AbstractController
             'nbPlaces' =>  $leHackathon->getNbplaces(),
             'image' =>  $leHackathon->getImage(),
         ];
-
         return new JsonResponse($TabJSON);
     }
 
@@ -114,7 +106,6 @@ class ApiController extends AbstractController
 
             ];
         }
-
         return new JsonResponse($TabJSON);
     }
 
@@ -151,23 +142,22 @@ class ApiController extends AbstractController
 
     public function inscriptionAtelier(Request $request, $id)
     {
-
-
         $donnees = $request->getContent();
-        dump($donnees);
         $user = json_decode($donnees, true);
-        dump($user);
+
         $nom = $user['nom'];
-        dump($nom);
         $prenom = $user['prenom'];
         $email = $user['email'];
+
         $uneInscription = new Inscriptionmobile();
         $repository = $this->getDoctrine()->getRepository(Evenement::class);
         $unEvenement = $repository->find($id);
+        
         $uneInscription->setIdevenement($unEvenement);
         $uneInscription->setNom($nom);
         $uneInscription->setPrenom($prenom);
         $uneInscription->setEmail($email);
+        
         $em = $this->getDoctrine()->getManager();
         $em->persist($uneInscription);
         $em->flush();
