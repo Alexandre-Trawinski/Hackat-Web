@@ -40,14 +40,15 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Hackathon::class);
         $lesHackathons = $repository->trierParDate();
         $lesVilles = $repository->getVilleHackathon();
+        $dateNow = new DateTime('now');
 
         return $this->render('home/liste.html.twig', [
-            'listeHackathons' => $lesHackathons, 'listeVilles' => $lesVilles
+            'listeHackathons' => $lesHackathons, 'listeVilles' => $lesVilles, 'dateNow' => $dateNow
         ]);
     }
 
     /**
-     * @Route("/liste/{id}", name="hackathon", requirements={"id"="\d+"})
+     * @Route("/liste/details/{id}", name="hackathon", requirements={"id"="\d+"})
      */
 
     public function afficherDetails($id): Response
@@ -95,24 +96,6 @@ class HomeController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    /**
-     * @Route("/addCompte", name="addCompte")
-     */
-    public function addCompte(Request $request): Response
-    {
-        $unParticipant = new Participant();
-        $form = $this->createForm(CompteType::class, $unParticipant);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($unParticipant);
-            $em->flush();
-            return $this->redirectToRoute('login');
-        }
-        return $this->render('addCompte/index.html.twig', [
-            'monForm' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/liste/{id}/inscription", name="inscription")
@@ -126,7 +109,7 @@ class HomeController extends AbstractController
         $date = date('Y-m-d');
         $laDate = new DateTime($date);
         $unParticipant = $this->getUser();
-        $competence = "dev full stack";
+        $competence = "full stack";
         $uneInscription = new Inscriptionhackathon();
         $uneInscription->setIdhackathon($unHackathon);
         $uneInscription->setIdparticipant($unParticipant);
@@ -137,41 +120,5 @@ class HomeController extends AbstractController
         $em->persist($uneInscription);
         $em->flush();
         return $this->render('home/index.html.twig');
-    }
-
-     /**
-     * @Route("/liste/{id}/favoris", name="hackathonFavoris")
-     */
-
-    public function favoris($id): Response
-    {
-        $repository = $this->getDoctrine()->getRepository(Favoris::class);
-        $leFavoris = $repository->findOneBy(['idhackathon' => $id, 'idparticipant' => $this->getUser()]);
-        if (is_null($leFavoris) == true) {
-            $favoris = new Favoris;
-            $favoris->setIdhackathon($this->getDoctrine()->getRepository(Hackathon::class)->find($id));
-            $favoris->setIdparticipant($this->getUser());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($favoris);
-        }
-        else{
-            $repository = $this->getDoctrine()->getRepository(Favoris::class);
-            $leFavoris = $repository->findOneBy(['idHackathon' => $id, 'idParticipant' => $this->getUser()]);
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($leFavoris);
-        
-        }
-        $em->flush();
-        return $this->redirectToRoute('listeHackathon');
-    }
-
-    /**
-     *  @Route("/lesFavoris", name="favoris")
-     */
-    public function getFavoris($user): Response
-    {
-        $repository = $this->getDoctrine()->getRepository(Favoris::class);
-        $lesFavoris = $repository->findBy(['idParticipant'=>$user]);
-        return $this->render('home/favoris.html.twig',[]);
     }
 }

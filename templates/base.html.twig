@@ -8,6 +8,7 @@
 		</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>H</text></svg>">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<link
@@ -35,9 +36,8 @@
 							</li>
 						</ul>
 						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-							<a style="margin-right:5%" class="btn btn-success" href="{{path('favoris')}}">Mon Tableau de Bord</a>
-							<a style="color:white; margin-right:5%;">{{ app.user.nom }}
-								{{app.user.prenom}}</a>
+							<a style="margin-right:5%" class="btn btn-success" href="{{path('favoris',{'idparticipant':app.user.idParticipant})}}">Mon Tableau de Bord</a>
+							<a style="color:white; margin-right:5%;">{{app.user.prenom}} {{ app.user.nom }}</a>
 							<a class="btn btn-danger" href="{{path('logout')}}">Se déconnecter</a>
 						{% else %}
 							<a class="btn btn" href="{{path('login')}}" style="background-color: #2ABA2D; color:white;">Se connecter</a>

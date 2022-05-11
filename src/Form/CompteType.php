@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class CompteType extends AbstractType
 {
@@ -25,7 +26,7 @@ class CompteType extends AbstractType
             ->add('rue')
             ->add('ville')
             ->add('codepostal')
-            ->add('mail')
+            ->add('mail', EmailType::class)
             ->add('tel')
             ->add('password', PasswordType::class)
             ->add('portfolio')

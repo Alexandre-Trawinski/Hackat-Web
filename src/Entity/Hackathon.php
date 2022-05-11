@@ -253,4 +253,18 @@ class Hackathon
 
         return $this;
     }
+
+    /**
+     * Set the value of idhackathon
+     *
+     * @param  int  $idhackathon
+     *
+     * @return  self
+     */ 
+    public function setIdhackathon(int $idhackathon)
+    {
+        $this->idhackathon = $idhackathon;
+
+        return $this;
+    }
 }

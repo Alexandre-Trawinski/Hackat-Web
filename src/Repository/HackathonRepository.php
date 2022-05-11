@@ -36,7 +36,6 @@ class HackathonRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
     // /**
     //  * @return Hackathon[] Returns an array of Hackathon objects
     //  */
