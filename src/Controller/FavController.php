@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use function PHPUnit\Framework\assertEquals;
+
 class FavController extends AbstractController
 {
     /**
@@ -63,11 +65,16 @@ class FavController extends AbstractController
     {
         $idparticipant = $this->getUser();
         $repository = $this->getDoctrine()->getRepository(Favoris::class);
+        $lesFavoris = $repository->findAll();
         $leFav=$repository->find($idfavoris);
         $em=$this->getDoctrine()->getManager();
         $em->remove($leFav);
         $em->flush();
+        $lesFavorism1 = $repository->findAll();
         
+        //On test si le favoris s'est bien supprimé 
+        assertEquals(count($lesFavoris) - 1, count($lesFavorism1), "true");
+
         return $this->redirectToRoute("home");
     }
 }

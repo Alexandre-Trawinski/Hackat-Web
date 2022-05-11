@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Inscriptionhackathon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\HackathonRepository;
 use DateTime;
@@ -17,6 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\isNull;
 
 class HomeController extends AbstractController
@@ -115,10 +117,13 @@ class HomeController extends AbstractController
         $uneInscription->setIdparticipant($unParticipant);
         $uneInscription->setDateinscription($laDate);
         $uneInscription->setCompetence($competence);
-
+        
         $em = $this->getDoctrine()->getManager();
         $em->persist($uneInscription);
         $em->flush();
+        
         return $this->render('home/index.html.twig');
     }
+
+    
 }
